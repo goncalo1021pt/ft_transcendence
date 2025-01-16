@@ -4,4 +4,4 @@ from .models import User
 
 def index(request):
     form = UserRegistrationForm()
-    return render(request, 'main/index.html', {'form': form})
+    return render(request, 'index.html', {'form': form})

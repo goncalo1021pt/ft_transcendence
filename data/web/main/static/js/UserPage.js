@@ -1,7 +1,7 @@
 export  class UserPage extends BaseComponent {
 
 	constructor() {
-		super('static/main/html/user.html');
+		super('static/html/user.html');
 	}
 
 	async onIni() {

@@ -1,7 +1,7 @@
 export  class ProfilePage extends BaseComponent {
 
 	constructor() {
-		super('static/main/html/profile.html');
+		super('static/html/profile.html');
 	}
 
 	async onIni() {

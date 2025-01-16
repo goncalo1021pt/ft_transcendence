@@ -1,7 +1,7 @@
 export  class HomePage extends BaseComponent {
 
 	constructor() {
-		super('static/main/html/home.html');
+		super('static/html/home.html');
 	}
 
 	async onIni() {
