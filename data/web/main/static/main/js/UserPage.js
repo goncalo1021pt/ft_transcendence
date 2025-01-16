@@ -8,7 +8,7 @@ export  class UserPage extends BaseComponent {
 	}
 
 	onIni(){
-		document.getElementById("tes").style.color = "red"
+		document.getElementById("user").style.color = "red"
 		console.log("onIni UserPage")
 	}
 
