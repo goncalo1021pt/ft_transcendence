@@ -5,24 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
 class BaseComponent extends HTMLElement {
 	constructor(template) {
 		super();
-		fetch(template).then(async (response) => {
-			if (response.ok) {
-				const html = await response.text()
-				this.innerHTML = html
-				this.onIni();
-			}
-			else
-				console.error('Failed to fetch users')
-		})	
+		this.contentLoaded = this.loadTemplate(template);
 	}
 
 	getElementById(id){
-		return this.querySelector("#"+id)
+		return this.querySelector("#" + id)
 	}
 
-
 	onIni(){
-		console.log("onIni")
+		// overriden in child classes
 	}
 
 	disconnectedCallback() {
@@ -30,8 +21,22 @@ class BaseComponent extends HTMLElement {
 	}
 
 	onDestroy(){
-		console.log("onDestroy")
+		// overriden in child classes
 	}
+
+	async loadTemplate(template) {
+        try {
+            const response = await fetch(template);
+            if (!response.ok) {
+                throw new Error('Failed to fetch template');
+            }
+            const html = await response.text();
+            this.innerHTML = html;
+            this.onIni();
+        } catch (error) {
+            console.error('Template loading failed:', error);
+        }
+    }
 
 }
 
@@ -65,9 +70,9 @@ class Router {
             const page = window.location.hash.slice(1) || defaultRoute;
             this.go(page);
         });
-        this.go(defaultRoute);  // Load the default route on page load
+        this.go(defaultRoute);  // Load the default route on page load // should actually just refresh the current page
     }
 }
 
-Router.init();
+
 

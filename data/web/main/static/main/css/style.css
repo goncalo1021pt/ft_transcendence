@@ -1,7 +1,24 @@
 .navbar {
-    margin-bottom: 2rem;
+	position: flex;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	margin-bottom: 0;
 }
 
 #content {
-    min-height: 400px;
+	min-height: 90%;
+	min-width: 90%;
+	padding: 0 5px;
+}
+
+.page-container {
+	background-color: #f5f5f5;  
+	min-height: calc(100vh - 96px);
+	padding: 2rem;             
+	border-radius: 8px;        
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);  
+	width: calc(100% - 10px);  
+	margin: 0 auto;            
 }

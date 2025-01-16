@@ -1,15 +1,14 @@
-
-
-
 export  class UserPage extends BaseComponent {
 
 	constructor() {
 		super('static/main/html/user.html');
 	}
 
-	onIni(){
-		document.getElementById("user").style.color = "red"
-		console.log("onIni UserPage")
+	async onIni() {
+		const element = this.getElementById("user");
+		if (element) {
+			//
+		}
 	}
 
 	onDestroy(){
