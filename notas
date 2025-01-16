@@ -1,23 +1,26 @@
-Web
+Web 6
 Major module = Django
 Minor module = Bootstrap
 Minor module = PostgreSQL
+Major moduel = Blockchain
 
-User Management
+User Management 2
 Major module = implement remote autentication (42 api)
 
-Gameplay and user expirience
+Gameplay and user expirience 4
 Major moduel = remote players
 Major module = live chat
 
-Ai algo
+Ai algo 3
 Major module = ai opponent
 minor module = User abd Game stats dashboard
 
-Cybercecurity 
+Cybercecurity 4
 Major module = 2fa
 Major module = implement WAF/ModSecurity with Hardened configuration
 
-Accessibilily
+Accessibilily 2
 Minor module = Multi language support
 Minor module = Support on all devices
+
+TOTAL: 21

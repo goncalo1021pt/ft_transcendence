@@ -1,4 +1,3 @@
-<!-- main/templates/main/index.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,24 +5,10 @@
     {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#home">Transcendence</a>
-            <div class="navbar-nav">
-                <a class="nav-link" href="#home">Home</a>
-                <a class="nav-link" href="#users">Users</a>
-                <a class="nav-link" href="#profile">Profile</a>
-            </div>
-        </div>
-    </nav>
-
-    <div id="content" class="container mt-4">
-        <!-- Dynamic content -->
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'main/js/router.js' %}"></script>
-</body>
+<body style="display: flex;height: 100vh;width: 100vw;">
+</body>    
+<script src="{% static 'main/js/router.js' %}"></script>
+<script type="module" src="{% static 'main/js/index.js' %}"></script>
 </html>
