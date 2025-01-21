@@ -5,3 +5,4 @@ from .models import User
 def index(request):
     form = UserRegistrationForm()
     return render(request, 'index.html', {'form': form})
+
