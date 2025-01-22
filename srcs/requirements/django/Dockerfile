@@ -10,12 +10,12 @@ RUN pip install --root-user-action=ignore channels
 
 RUN pip install --root-user-action=ignore daphne[http2]
 
-RUN django-admin startproject app
+RUN django-admin startproject runtime
 
 COPY entry.sh /
 
 RUN chmod +x entry.sh
 
-RUN python /app/manage.py startapp main
+RUN python /runtime/manage.py startapp backend
 
 CMD ["./entry.sh"]

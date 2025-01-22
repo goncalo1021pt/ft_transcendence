@@ -1,5 +1,5 @@
 """
-ASGI config for app project.
+ASGI config for backend project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -9,15 +9,15 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/
 
 import os
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'runtime.settings') 
 
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
-from main.routing import websocket_urlpatterns
+from backend.routing import websocket_urlpatterns
 
 application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
-    "websocket": URLRouter(websocket_urlpatterns),
+	"http": get_asgi_application(),
+	"websocket": URLRouter(websocket_urlpatterns),
 })
 
 

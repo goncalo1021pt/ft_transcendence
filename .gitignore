@@ -1,6 +1,9 @@
 data/db
-data/web/app/__pycache__
-data/web/main/__pycache__
+data/web/backend/__pycache__
+data/web/backend/migrations
+data/web/runtime/__pycache__
 data/web/db.sqlite3
-data/web/main/migrations
+
+
+
 .vscode

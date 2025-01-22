@@ -1,12 +1,14 @@
 #!/bin/bash
 
-python /app/manage.py makemigrations main
+python /runtime/manage.py makemigrations backend
 
-python /app/manage.py migrate
+python /runtime/manage.py migrate
 
-DJANGO_SUPERUSER_PASSWORD="$(cat /run/secrets/web_adm_psw)" python /app/manage.py createsuperuser \
+# should only run once
+DJANGO_SUPERUSER_PASSWORD="$(cat /run/secrets/web_adm_psw)" python /runtime/manage.py createsuperuser \
 	--noinput \
 	--username "$(cat /run/secrets/web_adm)" \
 	--email "$(cat /run/secrets/web_adm)"@transcendence.com
 
-python /app/manage.py runserver 0.0.0.0:8080
+
+python /runtime/manage.py runserver 0.0.0.0:8080
