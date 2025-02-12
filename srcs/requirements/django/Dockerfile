@@ -16,6 +16,7 @@ COPY entry.sh /
 
 RUN chmod +x entry.sh
 
+WORKDIR /ft_transcendence
 # RUN python /ft_transcendence/manage.py startapp backend /ft_transcendence
 
-CMD ["./entry.sh"]
+CMD ["/entry.sh"]
