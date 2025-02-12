@@ -1,10 +1,15 @@
+.vscode
+
 data/db
-data/web/backend/__pycache__
+
 data/web/backend/migrations
-data/web/backend/pong/__pycache__
+data/web/pong/migrations
+
+data/web/backend/__pycache__
+data/web/pong/__pycache__
 data/web/runtime/__pycache__
+
 data/web/db.sqlite3
 
 
 
-.vscode

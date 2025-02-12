@@ -143,3 +143,29 @@ This approach combines the strengths of Django for backend development with mode
 - **Custom Elements**: Encapsulated behavior and style.
 - **Router**: Dynamic navigation and content loading.
 - **Django Backend**: Robust server-side logic and database management.
+
+
+
+### Classic Pong Game Difficulty Mechanics:
+
+1. **Ball Speed**
+- Gradually increases throughout rally
+- Resets on point score
+- Original Atari version increased speed up to 4x initial speed
+
+2. **Ball Angle**
+- Different bounce angles based on where ball hits paddle
+- Center hits = straight return
+- Edge hits = more extreme angles
+
+3. **Paddle Size**
+- Original Pong kept same paddle size
+- Some variants reduced paddle size after each point
+- Modern versions sometimes shrink paddles during long rallies
+
+4. **Rally Counter**
+- Displayed points for consecutive hits
+- Higher scores for maintaining long rallies
+- Created tension and competitiveness
+
+The original Atari Pong (1972) primarily used ball speed increase as its main difficulty mechanic, while later versions added these other elements to enhance gameplay.

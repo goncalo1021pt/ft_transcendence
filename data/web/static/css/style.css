@@ -2,7 +2,6 @@ body {
 	background-color: #000000;
 	margin: 0;
 	padding: 0;
-
 	display: flex;
 	flex-direction: column;
 	position: relative; /* For absolute positioning of nav elements */

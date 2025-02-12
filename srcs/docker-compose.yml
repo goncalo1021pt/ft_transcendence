@@ -13,7 +13,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - web_data:/runtime
+      - web_data:/ft_transcendence
     secrets:
       - db_name
       - db_user

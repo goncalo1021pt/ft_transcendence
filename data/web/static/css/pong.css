@@ -36,6 +36,15 @@
 	display: none;
 }
 
+
+.lobby-status {
+    color: rgb(157, 148, 148);
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 #game-field {
 	width: 0;
 	height: 0;
