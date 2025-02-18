@@ -62,3 +62,4 @@ def check_auth(request):
 			}
 		})
 	return JsonResponse({'isAuthenticated': False})
+

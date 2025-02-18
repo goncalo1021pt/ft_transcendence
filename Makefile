@@ -22,8 +22,7 @@ fclean:
 	sudo rm -rf data/db
 #	sudo rm -rf data/web
 
-re:
-	fclean all
+re: fclean all
 
 status: 
 	docker ps

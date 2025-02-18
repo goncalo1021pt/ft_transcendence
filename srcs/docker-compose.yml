@@ -8,7 +8,7 @@ services:
     networks:
       - transcendence
     ports:
-      - "443:443"
+      - "8080:443"
     volumes:
       - web_data:/ft_transcendence
       
@@ -60,13 +60,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: data/web
+      device: ../data/web
       o: bind
   db_data:
     driver: local
     driver_opts:
       type: none
-      device: data/db
+      device: ../data/db
       o: bind
 
 secrets:
