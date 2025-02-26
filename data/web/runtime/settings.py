@@ -60,6 +60,8 @@ SESSION_COOKIE_SECURE = True
 
 # Application definition
 
+SITE_ID = 1
+
 INSTALLED_APPS = [
 	'daphne',
 	'channels',
@@ -69,6 +71,11 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django.contrib.sites',
+	'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.oauth2',
 	'backend',
 	'pong',
 	'authservice',
@@ -84,6 +91,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'runtime.urls'
@@ -93,7 +101,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'templates',
-			BASE_DIR / 'templates', 'views',
+            BASE_DIR / 'templates', 'views',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -179,3 +187,24 @@ STATICFILES_DIRS = [BASE_DIR / 'static',]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+	'42school': {
+		'SCOPE': [
+			'email',
+			'profile',
+		],
+		'AUTH_PARAMS': {
+			'access_type': 'online',
+		},
+		'APP': {
+			'client_id': read_secret('42_uid.txt'),
+			'secret': read_secret('42_secret.txt'),
+			'key': '',
+		},
+	}
+}
