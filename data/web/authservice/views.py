@@ -8,6 +8,9 @@ from backend.forms import UserRegistrationForm
 import json
 import uuid
 import requests
+import logging
+
+logger = logging.getLogger('pong')
 
 
 def register_request(request):
@@ -81,35 +84,45 @@ def get_user_42(request):
 	return JsonResponse({'isAuthenticated': False})
 
 def oauth_callback(request):
+	logger.debug(request)
 	code = request.GET.get('code')
 	if not code:
+		logger.debug('I got here:')
 		return redirect('login')
-	
+
 	token_url = 'https://api.intra.42.fr/oauth/token'
 	token_data = {
 		'grant_type': 'authorization_code',
 		'client_id': settings.SOCIALACCOUNT_PROVIDERS['42school']['APP']['client_id'],
 		'client_secret': settings.SOCIALACCOUNT_PROVIDERS['42school']['APP']['secret'],
 		'code': code,
-		'redirect_uri': 'http://localhost:8080/oauth/callback/',
+		'redirect_uri': 'https://localhost/oauth/callback/',
 	}
-	json_token = requests.post(token_url, data=token_data).json()
-	acces_token = json_token['access_token']
 
-	if not acces_token:
-		return redirect('login')
-	
+	logger.debug('Here is the bug')
+	logger.debug('cid %s', settings.SOCIALACCOUNT_PROVIDERS['42school']['APP']['client_id'])
+	logger.debug('Token data: %s', token_data)
+	token_response = requests.post(token_url, data=token_data)
+	token_json = token_response.json()
+
+	logger.debug('Token response: %s', token_json)
+
+	access_token = token_json.get('access_token')
+	if not access_token:
+		logger.error('Access token not found in token response')
+		return JsonResponse({'error': 'Invalid request'}, status=400)
 	user_info_url = 'https://api.intra.42.fr/v2/me'
-	headers = {'Authorization': f'Bearer {acces_token}',}
-	user_info = requests.get(user_info_url, headers=headers).json()
+	headers = {'Authorization': f'Bearer {access_token}'}
+	user_info_response = requests.get(user_info_url, headers=headers)
+	user_info = user_info_response.json()
 
-	username = user_info['login']
-	email = user_info['email']
-	
+	username = user_info.get('login')
+	email = user_info.get('email')
+
 	user, created = User.objects.get_or_create(username=username, defaults={'email': email})
 	if created:
 		user.set_unusable_password()
 		user.save()
 
 	login(request, user)
-	return redirect('home-view')
+	return JsonResponse({'message': 'Logged out successfully'})
