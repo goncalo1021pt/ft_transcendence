@@ -4,7 +4,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseForbidden
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_backends
-from backend.models import User  # Updated import
+from backend.models import User
 from backend.forms import UserRegistrationForm
 import json
 import uuid
@@ -114,14 +114,32 @@ def oauth_callback(request):
 
 	username = user_info.get('login')
 	email = user_info.get('email')
+	user_id = user_info.get('id')
 
-	user, created = User.objects.get_or_create(username=username, defaults={'email': email})
-	if created:
+	# Create user if not exists
+	try:
+		user = User.objects.get(username=username)
+		if not user.is_42_user:
+			# Handle username conflict by generating a new username
+			for i in range(1, 10000):
+				new_username = f'{username}_{i}'
+				if not User.objects.filter(username=new_username).exists():
+					username = new_username
+					break
+		if user.uuid is None:
+			user.uuid = uuid.uuid4()
+			user.save()
+	except User.DoesNotExist:
+		# If the user does not exist, create a new user
+		user = User(username=username, email=email, id_42=user_id, is_api_user=True)
 		user.set_unusable_password()
+		user.uuid = uuid.uuid4()
 		user.save()
 
+
+	# Get the authentication backends configured in Django settings
 	backends = get_backends()
 	user.backend = f'{backends[0].__module__}.{backends[0].__class__.__name__}'
 
 	login(request, user)
-	return JsonResponse({'message': 'Login successful'})
+	return redirect('/#/profile')
