@@ -3,7 +3,8 @@ from django.conf import settings
 from django.http import JsonResponse, HttpResponse, HttpResponseForbidden
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth import get_backends
+from backend.models import User  # Updated import
 from backend.forms import UserRegistrationForm
 import json
 import uuid
@@ -87,7 +88,6 @@ def oauth_callback(request):
 	logger.debug(request)
 	code = request.GET.get('code')
 	if not code:
-		logger.debug('I got here:')
 		return redirect('login')
 
 	token_url = 'https://api.intra.42.fr/oauth/token'
@@ -99,18 +99,14 @@ def oauth_callback(request):
 		'redirect_uri': 'https://localhost/oauth/callback/',
 	}
 
-	logger.debug('Here is the bug')
-	logger.debug('cid %s', settings.SOCIALACCOUNT_PROVIDERS['42school']['APP']['client_id'])
-	logger.debug('Token data: %s', token_data)
 	token_response = requests.post(token_url, data=token_data)
 	token_json = token_response.json()
-
-	logger.debug('Token response: %s', token_json)
-
 	access_token = token_json.get('access_token')
+
 	if not access_token:
 		logger.error('Access token not found in token response')
 		return JsonResponse({'error': 'Invalid request'}, status=400)
+	
 	user_info_url = 'https://api.intra.42.fr/v2/me'
 	headers = {'Authorization': f'Bearer {access_token}'}
 	user_info_response = requests.get(user_info_url, headers=headers)
@@ -124,5 +120,8 @@ def oauth_callback(request):
 		user.set_unusable_password()
 		user.save()
 
+	backends = get_backends()
+	user.backend = f'{backends[0].__module__}.{backends[0].__class__.__name__}'
+
 	login(request, user)
-	return JsonResponse({'message': 'Logged out successfully'})
+	return JsonResponse({'message': 'Login successful'})

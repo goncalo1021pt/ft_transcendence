@@ -202,8 +202,8 @@ SOCIALACCOUNT_PROVIDERS = {
 			'access_type': 'online',
 		},
 		'APP': {
-			'client_id': read_secret('42_uid.txt'),
-			'secret': read_secret('42_secret.txt'),
+			'client_id': read_secret('42_uid'),
+			'secret': read_secret('42_secret'),
 			'key': '',
 		},
 	}
