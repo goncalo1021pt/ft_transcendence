@@ -1,12 +1,4 @@
 from django.shortcuts import render, redirect
-<<<<<<< HEAD
-from django.http import JsonResponse, HttpResponse, HttpResponseForbidden
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from backend.forms import UserRegistrationForm
-import json
-import uuid
-=======
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse, HttpResponseForbidden
 from django.contrib.auth import authenticate, login, logout
@@ -20,7 +12,6 @@ import requests
 import logging
 
 logger = logging.getLogger('pong')
->>>>>>> refs/remotes/origin/goncalo
 
 
 def register_request(request):
@@ -63,17 +54,10 @@ def login_request(request):
 
 
 def logout_request(request): 
-<<<<<<< HEAD
-    if request.user.is_authenticated:
-        logout(request)
-        return JsonResponse({'message': 'Logged out successfully'})
-    return JsonResponse({'message': 'Already logged out'}, status=200)
-=======
 	if request.user.is_authenticated:
 		logout(request)
 		return JsonResponse({'message': 'Logged out successfully'})
 	return JsonResponse({'message': 'Already logged out'}, status=200)
->>>>>>> refs/remotes/origin/goncalo
 
 
 def check_auth(request):
@@ -86,8 +70,6 @@ def check_auth(request):
 		})
 	return JsonResponse({'isAuthenticated': False})
 
-<<<<<<< HEAD
-=======
 def get_user_42(request):
 	if request.user.is_authenticated:
 		return JsonResponse({ 
@@ -161,4 +143,3 @@ def oauth_callback(request):
 
 	login(request, user)
 	return redirect('/#/profile')
->>>>>>> refs/remotes/origin/goncalo
