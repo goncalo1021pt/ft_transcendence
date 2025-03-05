@@ -14,5 +14,10 @@ class User(AbstractUser):  # Inherits all these fields:
 	# Is superuser
 	# Last login
 	# Date joined
+<<<<<<< HEAD
+=======
+	is_42_user = models.BooleanField(default=False)
+	id_42 = models.IntegerField(default=0)
+>>>>>>> refs/remotes/origin/goncalo
 	uuid : models.UUIDField = None
 	pass

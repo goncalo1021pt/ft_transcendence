@@ -16,6 +16,30 @@ from authservice.config import SOCIALACCOUNT_PROVIDERS as FORTY_TWO_PROVIDERS
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGGING = {
+	'version': 1,
+	'disable_existing_loggers': False,
+	'formatters': {
+		'verbose': {
+			'format': '[{levelname}] {message}',
+			'style': '{'
+		}
+	},
+	'handlers': {
+		'console': {
+			'class': 'logging.StreamHandler',
+			'formatter': 'verbose',
+			'level': 'DEBUG',
+		},
+	},
+	'loggers': {
+		'pong': {
+			'handlers': ['console'],
+			'level': 'DEBUG',
+			'propagate': False,
+		},
+	}
+}
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -50,9 +74,9 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'django.contrib.sites',
 	'allauth',
-	'allauth.account',
-	'allauth.socialaccount',
-	'allauth.socialaccount.providers.oauth2',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.oauth2',
 	'backend',
 	'pong',
 	'authservice',
@@ -73,22 +97,22 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'runtime.urls'
 
 TEMPLATES = [
-	{
-		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [
-			BASE_DIR / 'templates',
-			BASE_DIR / 'templates', 'views',
-		],
-		'APP_DIRS': True,
-		'OPTIONS': {
-			'context_processors': [
-				'django.template.context_processors.debug',
-				'django.template.context_processors.request',
-				'django.contrib.auth.context_processors.auth',
-				'django.contrib.messages.context_processors.messages',
-			],
-		},
-	},
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            BASE_DIR / 'templates',
+            BASE_DIR / 'templates', 'views',
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
 ]
 
 WSGI_APPLICATION = 'runtime.wsgi.application'
@@ -164,13 +188,23 @@ STATICFILES_DIRS = [BASE_DIR / 'static',]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = [
-	'django.contrib.auth.backends.ModelBackend',
-	'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-
 SOCIALACCOUNT_PROVIDERS = {
-    '42': FORTY_TWO_PROVIDERS['42']
+	'42school': {
+		'SCOPE': [
+			'email',
+			'profile',
+		],
+		'AUTH_PARAMS': {
+			'access_type': 'online',
+		},
+		'APP': {
+			'client_id': read_secret('42_uid'),
+			'secret': read_secret('42_secret'),
+			'key': '',
+		},
+	}
 }

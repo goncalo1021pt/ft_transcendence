@@ -1,5 +1,6 @@
 from django.urls import path
-from .pong import SinglePongConsumer, MultiPongConsumer, QuickLobby
+from .consumers import SinglePongConsumer, MultiPongConsumer
+from .lobby import QuickLobby
 
 websocket_urlpatterns = [
     path('wss/spong/', SinglePongConsumer.as_asgi()),

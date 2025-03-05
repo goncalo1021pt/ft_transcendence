@@ -165,4 +165,7 @@ export class GameField {
 	}
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/goncalo

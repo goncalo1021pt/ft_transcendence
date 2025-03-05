@@ -37,8 +37,8 @@ GAME_SETTINGS = {
 
 
 class Player:
-	def __init__(self, session_key, paddle):
-		self.player_id = session_key
+	def __init__(self, username, paddle):
+		self.player_id = username
 		self.paddle = paddle
 		self.score = 0
 		self.sets = 0

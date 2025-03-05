@@ -8,7 +8,7 @@ services:
     networks:
       - transcendence
     ports:
-      - "8080:443"
+      - "443:443"
     volumes:
       - web_data:/ft_transcendence
       
@@ -24,6 +24,8 @@ services:
     volumes:
       - web_data:/ft_transcendence
     secrets:
+      - 42_secret
+      - 42_uid  
       - db_name
       - db_user
       - db_user_psw
@@ -70,6 +72,10 @@ volumes:
       o: bind
 
 secrets:
+  42_secret:
+    file: ../secrets/42_secret.txt
+  42_uid:
+    file: ../secrets/42_uid.txt
   db_name:
     file: ../secrets/db_name.txt
   db_user:

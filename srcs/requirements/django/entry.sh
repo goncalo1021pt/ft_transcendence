@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /ft_transcendence
 
-python manage.py makemigrations backend pong
+python manage.py makemigrations backend pong authservice
 
 python manage.py migrate
 
