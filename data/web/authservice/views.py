@@ -45,9 +45,9 @@ def login_request(request):
 			login(request, user) 
 			return JsonResponse({ 
 				'message': 'Login successful',
-				'user': {
-					'uuid': str(user.uuid),
-				}
+				# 'user': {
+				# 	'uuid': str(user.uuid),
+				# }
 			})
 		return JsonResponse({'error': 'Invalid credentials'}, status=401)
 	return JsonResponse({'error': 'Invalid request'}, status=400)
@@ -126,14 +126,14 @@ def oauth_callback(request):
 				if not User.objects.filter(username=new_username).exists():
 					username = new_username
 					break
-		if user.uuid is None:
-			user.uuid = uuid.uuid4()
-			user.save()
+		# if user.uuid is None:
+		# 	user.uuid = uuid.uuid4()
+		# 	user.save()
 	except User.DoesNotExist:
 		# If the user does not exist, create a new user
-		user = User(username=username, email=email, id_42=user_id, is_api_user=True)
+		user = User(username=username, email=email, id_42=user_id, is_42_user=True)
 		user.set_unusable_password()
-		user.uuid = uuid.uuid4()
+		# user.uuid = uuid.uuid4()
 		user.save()
 
 
