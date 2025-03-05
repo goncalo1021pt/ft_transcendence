@@ -62,13 +62,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ../data/web
+      device: data/web
       o: bind
   db_data:
     driver: local
     driver_opts:
       type: none
-      device: ../data/db
+      device: data/db
       o: bind
 
 secrets:
