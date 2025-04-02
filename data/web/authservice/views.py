@@ -206,3 +206,7 @@ def oauth_callback(request):
 
 	login(request, user)
 	return redirect('/#/home')
+
+
+def twoFactor(request):
+	return redirect('/#/profile')

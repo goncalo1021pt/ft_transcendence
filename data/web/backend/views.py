@@ -62,5 +62,8 @@ def tournament_view(request):
 		return render(request, 'views/tournament-view.html')
 	return HttpResponseForbidden('Not authenticated')
 
-
+def twoFactor_view(request):
+	if request.user.is_authenticated:
+		return redirect('home-view')
+	return render(request, 'views/twoFactor-view.html')
 
