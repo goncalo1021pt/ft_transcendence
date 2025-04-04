@@ -7,8 +7,14 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import get_backends
 from backend.models import User
+from django_otp.util import random_hex
+from django_otp.plugins.otp_totp.models import TOTPDevice
 from backend.forms import UserRegistrationForm
 import json, requests, logging
+import qrcode
+import base64
+from io import BytesIO
+
 
 logger = logging.getLogger('pong')
 
@@ -35,9 +41,18 @@ def login_request(request):
 	password = data.get('password')
 	user = authenticate(request, username=username, password=password)
 	if user is not None:
+		#implement 2FA check here
+		# if user.two_factor_enable:
+		# 	# Handle 2FA verification
+		# 	return JsonResponse({'error': '2FA required'}, status=403)
 		login(request, user)
 		return JsonResponse({
 			'message': 'Login successful',
+			'user': {
+				'uuid': str(user.uuid),
+				'username': str(user.username),
+				'profile_pic': str(user.profile_pic),
+			}
 		})
 	return JsonResponse({'error': 'Invalid credentials'}, status=401)
 
@@ -207,6 +222,92 @@ def oauth_callback(request):
 	login(request, user)
 	return redirect('/#/home')
 
-
+@login_required
 def twoFactor(request):
-	return redirect('/#/profile')
+	user = request.user
+	if user.is_42_user:
+		return JsonResponse({'error': '42 users cannot enable 2FA'}, status=403)
+	
+	if user.two_factor_enable:
+		return JsonResponse({'error': '2FA is already enabled'}, status=403)
+	
+	device, created = TOTPDevice.objects.get_or_create(user=user, name='default')
+
+	if created:
+		device.save()
+
+	# Generate otp uri
+	issuer = 'transcendence'
+	secret = base64.b32encode(bytes.fromhex(device.key)).decode('utf-8')
+	algorithm = 'SHA1'
+	digits = 6
+	period = 30
+	otp_uri = (
+        f"otpauth://totp/{issuer}:{user.username}"
+        f"?secret={secret}&issuer={issuer}&algorithm={algorithm}&digits={digits}&period={period}"
+    )
+
+	# Generate QR code
+	qr = qrcode.make(otp_uri)
+	buffer = BytesIO()
+	qr.save(buffer, format='PNG')
+	qr_image = buffer.getvalue()
+
+	qr_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+	return JsonResponse({ 
+		'success': True,
+		'qr_image': qr_base64,
+		'otp_uri': otp_uri,
+	})
+
+
+@require_http_methods(["POST"])
+@login_required
+def verify_2fa_enable(request):
+	try:
+		data = json.loads(request.body)
+		opt_token = data.get('otp_token')
+
+
+		if not opt_token:
+			return JsonResponse({'error': 'OTP token is required'}, status=400)
+		
+		user = request.user
+
+		if user.two_factor_enable:
+			return JsonResponse({'error': '2FA is already enabled'}, status=403)
+
+		device = TOTPDevice.objects.filter(user=user, name='default').first()
+		if not device:
+			return JsonResponse({'error': 'Device not found'}, status=404)
+		
+		logger.debug(f"Verifying OTP token: {opt_token}")
+		if device.verify_token(opt_token):
+			logger.debug(f"OTP token verified successfully for user: {user.username}")
+			user.two_factor_enable = True
+			user.save()
+			return JsonResponse({'success': True, 'message': '2FA enabled successfully'})
+		else:
+			return JsonResponse({'error': 'Invalid OTP token'}, status=400)
+		
+	except json.JSONDecodeError:
+		return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+	except Exception as e:
+		logger.error(f"Error verifying OTP token: {str(e)}")
+		return JsonResponse({'error': 'An error occurred while verifying the OTP token'}, status=500)
+
+@require_http_methods(["POST"])
+@login_required
+def verify_2fa_disable(request):
+	user = request.user
+	if user.two_factor_enable:
+		user.two_factor_enable = False
+		user.save()
+		return JsonResponse({'success': True, 'message': '2FA disabled successfully'})
+	else:
+		return JsonResponse({'error': '2FA is already disabled'}, status=400)
+
+@require_http_methods(["POST"])
+def verify_2fa_login(request):
+	return JsonResponse({'success': True})

@@ -27,6 +27,7 @@ export class AuthService {
 
 		const data = await response.json();
 		if (response.ok) {
+			// console.log(data);
 			this.isAuthenticated = true;
 			this.currentUser = data.user;
 			//window.location.hash = '#/home';

@@ -11,5 +11,6 @@ urlpatterns = [
 	path('update-2fa/', views.update_2fa, name='update_2fa'),
 	path('change-password/', views.change_password, name='change-password'),
 	path('twoFactor/', views.twoFactor, name='twoFactor'),
+	path('verify_2fa_enable/', views.verify_2fa_enable, name='verify_2fa_enable'),
 
 ]

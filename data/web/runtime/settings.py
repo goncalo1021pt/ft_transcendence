@@ -95,9 +95,11 @@ INSTALLED_APPS = [
 	'django.contrib.sites',
 	'django.contrib.postgres',
 	'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.oauth2',
+	'allauth.account',
+	'allauth.socialaccount',
+	'allauth.socialaccount.providers.oauth2',
+	'django_otp',
+	'django_otp.plugins.otp_totp',
 	'backend',
 	'pong',
 	'tournaments',
@@ -108,16 +110,20 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'backend.User'
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+	'django.middleware.security.SecurityMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'allauth.account.middleware.AccountMiddleware',
+	'django_otp.middleware.OTPMiddleware',
 ]
+
 ROOT_URLCONF = 'runtime.urls'
+
+TIME_ZONE = 'Europe/Lisbon'
 
 TEMPLATES = [
     {
@@ -234,5 +240,8 @@ SOCIALACCOUNT_PROVIDERS = {
 		},
 	}
 }
+
+LOGIN_URL = 'two_factor:login'
+LOGIN_REDIRECT_URL = 'two_factor:profile'
 
 WEB_HOST = read_secret('web_host')

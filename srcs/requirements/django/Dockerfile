@@ -22,6 +22,9 @@ RUN pip install --root-user-action=ignore django-allauth
 
 RUN pip install --root-user-action=ignore pillow
 
+RUN pip install --root-user-action=ignore django-otp
+
+RUN pip install --root-user-action=ignore qrcode
 # RUN django-admin startproject ft_transcendence
 
 COPY entry.sh /

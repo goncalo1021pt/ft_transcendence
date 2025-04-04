@@ -17,7 +17,7 @@ Router.subscribe('pong', PongView);
 Router.subscribe('tournament', TournamentView);
 Router.subscribe('register', RegisterView);
 Router.subscribe('login', LoginView);
-Router.subscribe('twofactor', TwofactorView);
+Router.subscribe('two-factor', TwofactorView);
 
 
 await AuthService.init();

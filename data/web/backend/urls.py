@@ -11,7 +11,7 @@ urlpatterns = [
 	path('tournament-view/', views.tournament_view, name='tournament-view'),
 	path('nav-menu/', views.nav_menu, name='nav-menu'),
 	path('login-menu/', views.login_menu, name='login-menu'),
-	path('twofactor-view/', views.twoFactor_view, name='twofactor-view'),
+	path('two-factor-view/', views.twoFactor_view, name='twofactor-view'),
 ]
 
 

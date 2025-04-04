@@ -25,6 +25,7 @@ class User(AbstractUser):  # Inherits all these fields:
 	rank = models.IntegerField(default=0)
 	status = models.BooleanField(default=False)
 	two_factor_enable = models.BooleanField(default=False)
+	two_factor_secret = models.CharField(max_length=255, blank=True, null=True)
 	
 	@property
 	def friends(self):
