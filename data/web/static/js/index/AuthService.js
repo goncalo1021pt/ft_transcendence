@@ -1,6 +1,6 @@
 export class AuthService {
-    static isAuthenticated = false;
-    static currentUser = null;
+	static isAuthenticated = false;
+	static currentUser = null;
 	static currentpfp = null;
 	static host = null;
 
@@ -13,7 +13,6 @@ export class AuthService {
 		}
 		
 	}
-
 	
 	static async login(username, password) {
 		const response = await fetch('/login/', {
@@ -27,11 +26,44 @@ export class AuthService {
 
 		const data = await response.json();
 		if (response.ok) {
-			// console.log(data);
-			this.isAuthenticated = true;
-			this.currentUser = data.user;
-			//window.location.hash = '#/home';
-			window.location.reload();
+			console.log(response);
+			if (response.status === 201) {
+				console.log('2fa required');
+				document.getElementById('login-form').style.display = 'none';
+				document.getElementById('2fa-form').style.display = 'block';
+	
+				// Store the username for the 2FA request
+				const storedUsername = username;
+	
+				// Add event listener for the 2FA form submission
+				document.getElementById('2fa-form').onsubmit = async (e) => {
+					e.preventDefault();
+					const code = document.getElementById('2fa-code').value;
+	
+					const response = await fetch('/verify_2fa_login/', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-CSRFToken': this.getCsrfToken(),
+						},
+						body: JSON.stringify({ username: storedUsername, code }) // Include username in the request
+					});
+	
+					const data = await response.json();
+					if (response.ok) {
+						this.isAuthenticated = true;
+						this.currentUser = data.user;
+						window.location.reload();
+					} else {
+						alert(data.error); // need to change to a modal
+					}
+				};
+			} else {
+				this.isAuthenticated = true;
+				this.currentUser = data.user;
+				window.location.reload();
+				// window.location.hash = '#/home';
+			}
 		} else {
 			const error = new Error(data.error);
 			error.status = response.status;
@@ -56,30 +88,29 @@ export class AuthService {
 			},
 		});
 
-        if (response.ok) {
-            this.isAuthenticated = false;
-            this.currentUser = null;
-        }
-		// window.location.hash = '#/home';
+		if (response.ok) {
+			this.isAuthenticated = false;
+			this.currentUser = null;
+		}
 		window.location.reload();
     }
 
 
-    static async register(userData) {
-        const response = await fetch('/register/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': this.getCsrfToken(),
-            },
-            body: JSON.stringify(userData)
-        });
+	static async register(userData) {
+		const response = await fetch('/register/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': this.getCsrfToken(),
+			},
+			body: JSON.stringify(userData)
+		});
 
-        const data = await response.json();
-        if (!response.ok) {
-            throw new Error(Object.values(data).join('\n'));
-        }
-    }
+		const data = await response.json();
+		if (!response.ok) {
+			throw new Error(Object.values(data).join('\n'));
+		}
+	}
 
 	static async change_password(oldpsw, newpsw) {
 		const response = await fetch('/change-password/', {
@@ -97,7 +128,7 @@ export class AuthService {
 	}
 
 	static async toggle2fa(enabled) {
-		const response = await fetch('/update-2fa/', {
+		const response = await fetch('/disable_2fa/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

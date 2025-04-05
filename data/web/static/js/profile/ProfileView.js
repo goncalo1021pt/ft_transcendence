@@ -282,6 +282,14 @@ class AccountTab {
 					if (e.target.checked) {
 						window.location.href = '#/two-factor';
 					} else {
+						// const response = fetch('/disable_2fa/', {
+						// 	method: 'POST',
+						// 	headers: {
+						// 		'Content-Type': 'application/json',
+						// 		'X-CSRFToken': AuthService.getCsrfToken(),
+						// 	},
+						// 	body: JSON.stringify({ two_factor_enable: false })
+						// });
 						this.toggle2FA(e.target.checked);
 					}
 				});

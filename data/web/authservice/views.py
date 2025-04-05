@@ -42,9 +42,14 @@ def login_request(request):
 	user = authenticate(request, username=username, password=password)
 	if user is not None:
 		#implement 2FA check here
-		# if user.two_factor_enable:
-		# 	# Handle 2FA verification
-		# 	return JsonResponse({'error': '2FA required'}, status=403)
+		if user.two_factor_enable:
+			return JsonResponse({
+				'autenticated': '2fa enabled',
+				'user': {
+					'uuid': str(user.uuid),
+					'username': str(user.username),
+					'profile_pic': str(user.profile_pic),
+				}}, status=201)
 		login(request, user)
 		return JsonResponse({
 			'message': 'Login successful',
@@ -299,10 +304,15 @@ def verify_2fa_enable(request):
 
 @require_http_methods(["POST"])
 @login_required
-def verify_2fa_disable(request):
+def disable_2fa(request):
 	user = request.user
 	if user.two_factor_enable:
 		user.two_factor_enable = False
+		device = TOTPDevice.objects.filter(user=user, name='default').first()
+		if device:
+			device.delete()
+		else:
+			return JsonResponse({'error': 'Device not found'}, status=404)
 		user.save()
 		return JsonResponse({'success': True, 'message': '2FA disabled successfully'})
 	else:
@@ -310,4 +320,32 @@ def verify_2fa_disable(request):
 
 @require_http_methods(["POST"])
 def verify_2fa_login(request):
-	return JsonResponse({'success': True})
+	data = json.loads(request.body)
+	logger.debug(f"Received data for 2FA login: {data}")
+	opt_token = data.get('code')
+	username = data.get('username')
+	user = User.objects.filter(username=username).first()
+	if not user:
+		logger.debug(f"User not found for 2FA login: {username}")
+		return JsonResponse({'error': 'User not found'}, status=404)
+	logger.debug(f"User for 2FA login: {user.username}")
+	
+	if not opt_token:
+		logger.debug("OTP token is missing for 2FA login")
+		return JsonResponse({'error': 'OTP token is required'}, status=400)
+	device = TOTPDevice.objects.filter(user=user, name='default').first()
+	if not device:
+		return JsonResponse({'error': 'Device not found'}, status=404)
+	if device.verify_token(opt_token):
+		user.backend = 'django.contrib.auth.backends.ModelBackend'
+		login(request, user)
+		return JsonResponse({
+				'message': 'Login successful',
+				'user': {
+					'uuid': str(user.uuid),
+					'username': str(user.username),
+					'profile_pic': str(user.profile_pic),
+				}
+			})
+	else:
+		return JsonResponse({'error': 'Invalid OTP token'}, status=400)
