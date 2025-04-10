@@ -54,6 +54,7 @@ export class LoginMenu extends BaseComponent {
 						this.notificationBadge = newBadge;
 						this.menu.parentNode.insertBefore(this.notificationBadge, this.menu);
 					}
+					this.notificationBadge.style.opacity = this.menu.classList.contains('expanded') ? '0' : '1';
 				}
 				else if (!newBadge && this.notificationBadge) {
 					this.notificationBadge.remove();

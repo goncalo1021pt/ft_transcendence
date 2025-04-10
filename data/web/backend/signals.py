@@ -2,7 +2,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver, Signal
 from channels.db import database_sync_to_async
 from asgiref.sync import async_to_sync
-from .models import FriendshipRequest, User
+from .models import FriendshipRequest, User, Ladderboard
 from .consumers import LoginMenuConsumer
 import logging
 
@@ -50,3 +50,16 @@ async def tournament_updated(sender, instance, **kwargs):
 				if consumer.user == user:
 					await consumer.broadcast({'event': 'tournament',})
 					break
+
+
+@receiver(post_save, sender=User)
+def update_ladderboard(sender, instance, created, **kwargs):
+	logger.debug(f"User {instance.username} saved with rank {instance.rank}")
+	ladderboard_entry, created = Ladderboard.objects.get_or_create(
+		user=instance,
+		defaults={'rank_value': instance.rank}
+	)
+	
+	if not created and ladderboard_entry.rank_value != instance.rank:
+		ladderboard_entry.rank_value = instance.rank
+		ladderboard_entry.save()

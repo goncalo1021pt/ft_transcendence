@@ -60,7 +60,6 @@ export class QuickLobby {
 					this.statusText.textContent = 'Match found! Starting game...';
 					this.parent.removeChild(this.lobbyElement);
 					const game = new MultiPongGame(this.parent, data.state, this.view);
-					console.log('Match found', data.state);
 					game.startGame();
 					break;
 			}
@@ -76,7 +75,9 @@ export class QuickLobby {
 	}
 
 	refreshView() {
-		window.location.reload();
+		// window.location.reload();
+		const hash = window.location.hash.substring(2);
+		Router.go(hash);
 	}
 }
 
@@ -86,10 +87,10 @@ export class TournamentLobby extends QuickLobby {
         this.gameId = gameId;
     }
     
-	createLobbyElement() {
-		super.createLobbyElement();
-		this.lobbyElement.removeChild(this.cancelButton);
-	}
+	// createLobbyElement() {
+	// 	super.createLobbyElement();
+	// 	this.lobbyElement.removeChild(this.cancelButton);
+	// }
 
     startLobby() {
         this.createLobbyElement(); 
@@ -117,7 +118,6 @@ export class PongGame {
         this.scene = null;
         this.camera = null;
         this.renderer = null;
-        this.lights = [];
         this.threeContainer = null;
         this.animationFrameId = null;
         
@@ -216,6 +216,7 @@ export class PongGame {
 				this.scoreBoard.showWinner(state.winner);
 				if (this.player1) this.player1.remove();
 				if (this.player2) this.player2.remove();
+				this.view.insertBackButton();
 				break;
 		}
 	}
@@ -261,7 +262,7 @@ export class PongGame {
 		// state.set_points
 
 		this.setupPlayers(state);
-		console.log("Game started!", state);
+		console.log("Game started!");
 	}
 
 	setupPlayers(state) {

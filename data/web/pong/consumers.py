@@ -70,7 +70,10 @@ class SinglePongConsumer(AsyncWebsocketConsumer):
 
 
 	async def broadcast(self, message):
-		await self.send(json.dumps(message))
+		try:
+			await self.send(json.dumps(message))
+		except Exception as e:
+			logger.error(f"Error sending message: {e}")
 
 	async def broadcast_game_start(self, game):
 		await self.broadcast({

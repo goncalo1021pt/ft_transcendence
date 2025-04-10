@@ -1,7 +1,7 @@
 from django.contrib import admin
 # from django.contrib.auth.admin import UserAdmin 
-from .models import User
 
+from .models import User, FriendshipRequest, Ladderboard
 # admin.site.register(User, UserAdmin)
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -18,7 +18,7 @@ class CustomUserAdmin(BaseUserAdmin):
         self.list_filter = BaseUserAdmin.list_filter + ('is_42_user', 'status')
         self.search_fields = BaseUserAdmin.search_fields + ('id_42', 'uuid')
         
-from .models import User, FriendshipRequest
+
 
 @admin.register(FriendshipRequest)
 class FriendshipRequestAdmin(admin.ModelAdmin):
@@ -38,3 +38,11 @@ class FriendshipRequestAdmin(admin.ModelAdmin):
 		updated = queryset.update(status='rejected')
 		self.message_user(request, f"{updated} friendship requests were rejected.")
 	reject_requests.short_description = "Reject selected friendship requests"
+
+
+@admin.register(Ladderboard)
+class LadderboardAdmin(admin.ModelAdmin):
+    list_display = ('user', 'rank_value', 'updated_at')
+    list_filter = ('updated_at',)
+    search_fields = ('user__username',)
+    ordering = ('-rank_value',)

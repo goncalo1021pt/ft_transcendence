@@ -84,6 +84,8 @@ class QuickLobby(AsyncWebsocketConsumer):
 				await player.send(json.dumps(match_data))
 				del self.queued_players[player_ids[i]]
 				await player.close()
+		
+		await self.broadcast_player_count()
 
 
 	async def broadcast_player_count(self):
@@ -125,3 +127,5 @@ class TournamentLobby(QuickLobby):
 					await player.send(json.dumps(match_data))
 					del self.queued_players[player_id]
 					await player.close()
+		
+		await self.broadcast_player_count()

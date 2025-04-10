@@ -189,3 +189,36 @@ class FriendshipRequest(models.Model):
 		
 	def __str__(self):
 		return f"{self.sender.username} → {self.receiver.username}: {self.get_status_display()}"
+
+
+class Ladderboard(models.Model):
+	user = models.OneToOneField(
+		'User',
+		on_delete=models.CASCADE,
+		related_name='rank_entry'
+	)
+	rank_value = models.IntegerField(default=0)
+	updated_at = models.DateTimeField(auto_now=True)
+	
+	class Meta:
+		indexes = [
+			models.Index(fields=['-rank_value']), 
+		]
+		ordering = ['-rank_value']
+	
+	def __str__(self):
+		return f"{self.user.username}: {self.rank_value} points"
+	
+	@classmethod
+	def get_leaderboard(cls, start=0, count=10):
+		return cls.objects.select_related('user').all()[start:start+count]
+    
+	@classmethod
+	def initialize_all(cls):
+		users = User.objects.all()
+		for user in users:
+			cls.objects.get_or_create(
+				user=user,
+				defaults={'rank_value': user.rank}
+			)
+

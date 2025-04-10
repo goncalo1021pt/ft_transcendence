@@ -31,7 +31,7 @@
 	box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	transition: all 0.3s ease;
-	overflow: hidden;
+	/* overflow: hidden; */
 	z-index: 1000;
 }
 
@@ -57,38 +57,20 @@
 
 #user-icon {
     object-fit: cover;
+	overflow: hidden;
 }
 
 .menu-button .menu-icon {
-	width: 30px;
-	height: 30px;
+	width: 35px;
+	height: 35px;
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 2px;
-	margin-left: 2px;
+	/* margin-top: 2px;
+	margin-left: 2px; */
+	overflow: visible;
 }
-
-
-/* 
-
-.game-button {
-    position: relative;
-    border-width: 2px;
-    transition: all 0.2s ease;
-    text-align: left;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.game-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px #878080;
-    background-color: rgba(230, 233, 236, 0.427);
-}
-
-*/
 
 .menu-button.expanded .menu-icon {
 	margin: 0 auto;
@@ -430,4 +412,19 @@
 #friends .btn:hover {
 	border-color: #e0e0e0;
     transition: all 0.2s ease;
+}
+
+
+#friend-search-container {
+	margin-bottom: 0  !important;
+}
+
+#friend-search-dropdown {
+    top: 2rem;
+    z-index: 1000;
+	border: #343a40 !important;
+}
+
+#friend-search-item {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
 }

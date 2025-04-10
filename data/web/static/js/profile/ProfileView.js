@@ -4,7 +4,6 @@ export class ProfileView extends BaseComponent {
 	constructor(username = null) {
 		super(username ? `/profile-view/${encodeURIComponent(username)}/` : '/profile-view/');
 		this.requestedUsername = username;
-		this.originalFormData = {};
 	}
 
 	async onIni() {
@@ -57,7 +56,8 @@ class FriendTab {
 	constructor(profileView) {
 		this.profileView = profileView;
 		this.requestedUsername = profileView.requestedUsername;
-
+		this.searchfield = null;
+		this.setupSearchAutocomplete();		
 	}
 
 	async handleFriendRequest(e) {
@@ -115,8 +115,91 @@ class FriendTab {
 		
 			this.profileView.setupFriendButtons();
 			// this.profileView.setupAccountButtons();
+			this.setupSearchAutocomplete();
 		}
 	}
+
+
+	setupSearchAutocomplete() {
+		this.searchfield = document.getElementById('friend-search-field');
+		if (!this.searchfield) return;
+		
+		this.dropdownContainer = document.createElement('div');
+		this.dropdownContainer.className = 'position-absolute bg-dark border rounded-bottom shadow-sm w-25  d-none';
+		this.dropdownContainer.id = 'friend-search-dropdown';
+
+		const searchContainer = this.searchfield.parentNode;
+		searchContainer.style.position = 'relative';
+		searchContainer.appendChild(this.dropdownContainer);
+		
+		let debounceTimer;
+		this.searchfield.oninput = () => {
+			clearTimeout(debounceTimer);
+			
+			if (this.searchfield.value.trim().length < 2) {
+				this.dropdownContainer.classList.add('d-none');
+				return;
+			}
+			
+			debounceTimer = setTimeout(() => {
+				this.fetchUserSuggestions();
+			}, 300);
+		};
+		
+		document.addEventListener('click', (e) => {
+			if (!this.searchfield.contains(e.target) ) {
+				this.dropdownContainer.classList.add('d-none');
+			}
+		});
+	}
+
+	async fetchUserSuggestions() {
+		const query = this.searchfield.value.trim();
+		if (query.length < 2) {
+			this.dropdownContainer.classList.add('d-none');
+			return;
+		}
+		console.log('fetching user suggestions');
+		const response = await fetch(`/friends/find-user/?q=${encodeURIComponent(query)}`);
+		if (!response.ok) throw new Error('Search request failed');
+		
+		const data = await response.json();
+		this.renderSuggestions(data.results);
+
+	}
+
+	renderSuggestions(results) {
+		this.dropdownContainer.innerHTML = '';
+		
+		if (results.length === 0) {
+			this.dropdownContainer.classList.add('d-none');
+			return;
+		}
+		
+		results.forEach(user => {
+			const item = document.createElement('div');
+			item.className = 'p-2 border-bottom d-flex align-items-center';
+			item.id = `friend-search-item`;
+			item.style.cursor = 'pointer';
+			
+			item.innerHTML = `
+				<img src="${user.profile_pic}" alt="${user.username}" 
+					 class="rounded-circle me-2" style="width: 24px; height: 24px;">
+				<span>${user.username}</span>
+			`;
+
+			item.addEventListener('click', () => {
+				window.location.hash = `#/profile/${user.username}/`;
+
+			});
+			
+			this.dropdownContainer.appendChild(item);
+
+		});
+		
+		this.dropdownContainer.classList.remove('d-none');
+	}
+
 }
 
 
@@ -282,14 +365,6 @@ class AccountTab {
 					if (e.target.checked) {
 						window.location.href = '#/two-factor';
 					} else {
-						// const response = fetch('/disable_2fa/', {
-						// 	method: 'POST',
-						// 	headers: {
-						// 		'Content-Type': 'application/json',
-						// 		'X-CSRFToken': AuthService.getCsrfToken(),
-						// 	},
-						// 	body: JSON.stringify({ two_factor_enable: false })
-						// });
 						this.toggle2FA(e.target.checked);
 					}
 				});

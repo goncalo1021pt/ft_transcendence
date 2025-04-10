@@ -163,10 +163,18 @@
 
 						<!-- Friends Tab -->
 						<div class="tab-pane fade" id="friends" role="tabpanel">
+							
+							{% if own_profile %}
+							<div class="d-flex justify-content-end mb-3" id="friend-search-container">
+								<input type="search" class="form-control form-control-sm w-25" placeholder="Find user..." id="friend-search-field">
+							</div>
+							{% endif %}
+
 							<h4>Friends</h4>
 							
 							<!-- Friend Requests Section (only visible on own profile) -->
 							{% if own_profile %}
+
 								{% if friends.pending_received.list or friends.pending_sent.list %}
 									<div class="card mb-4">
 										<div class="card-header bg-light">

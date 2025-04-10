@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseForbidden
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
+from .models import User
+from pong.models import CompletedGame
+from tournaments.models import Tournament
 import logging
 
 logger = logging.getLogger('pong')
@@ -13,8 +16,16 @@ def index(request):
 	return render(request, 'index.html')
 
 
+
 def home_view(request):
-		return render(request, 'views/home-view.html')
+	context = {
+		'stats': {
+			"players" : User.objects.count(),
+			"games" : CompletedGame.objects.count(),
+			"champions" : Tournament.objects.filter(status='COMPLETED').count(),
+		}
+	}
+	return render(request, 'views/home-view.html', context)
 
 
 def nav_menu(request):
@@ -72,5 +83,10 @@ def twoFactor_view(request):
 			return render(request, 'views/twoFactor-view.html')
 		else:
 			return redirect('home-view')
+	return HttpResponseForbidden('Not authenticated')
+
+def ladderboard_view(request):
+	if request.user.is_authenticated:
+		return render(request, 'views/ladderboard-view.html')
 	return HttpResponseForbidden('Not authenticated')
 

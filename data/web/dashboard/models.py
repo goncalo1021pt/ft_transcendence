@@ -25,7 +25,6 @@ def user_picture(user):
 def user_rank(user):
 	return user.rank if user else 0
 
-# redundant function, can call user.status directly
 def user_status(user):
 	if not user:
 		return "offline"
@@ -144,7 +143,6 @@ def format_matches(matches_data):
 
 
 def user_friends(user: User):
-	"""Get friends list for a user using the FriendshipRequest model"""
 	if not user:
 		return {"list": []}
 	
@@ -166,7 +164,6 @@ def user_friends(user: User):
 	}
 
 def user_pending_received(user: User):
-	"""Get pending friend requests received by the user"""
 	if not user:
 		return {"list": []}
 	
@@ -190,7 +187,6 @@ def user_pending_received(user: User):
 	}
 
 def user_pending_sent(user: User):
-	"""Get pending friend requests sent by the user"""
 	if not user:
 		return {"list": []}
 	

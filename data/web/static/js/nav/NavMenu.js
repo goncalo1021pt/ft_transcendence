@@ -24,14 +24,15 @@ export class NavMenu extends BaseComponent {
             menu.classList.remove('expanded');
         });
     }
-    addNavButtonHandler(button, hash) {
-        button.addEventListener('click', () => {
-            if (window.location.hash === hash)
-                window.location.reload();
-            else
-                window.location.hash = hash;
-        });
-    }
+	
+	addNavButtonHandler(button, hash) {
+		button.addEventListener('click', () => {
+			if (window.location.hash === hash)
+				Router.go(hash.substring(2));
+			else
+				window.location.hash = hash;
+		});
+	}
 }
 
 customElements.define('nav-menu', NavMenu);

@@ -23,6 +23,9 @@ fclean:
 
 populate_secrets:
 	bash scripts/get_ip.sh | sed 's/$$/:4443/' > secrets/web_host.txt
+
+clean_migrations:
+	bash scripts/delete_cache.sh
 	
 re: fclean all
 

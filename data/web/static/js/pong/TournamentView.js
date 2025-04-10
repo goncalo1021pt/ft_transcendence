@@ -1,7 +1,7 @@
 import { AuthService } from '../index/AuthService.js';
 import { MultiPongGame, TournamentLobby } from './SinglePongGame.js';
 
-export class TournamentView extends BaseComponent {
+export class TournamentView extends BaseComponent { // could extend pongview ?
 	constructor() {
 		super('/tournament-view/');
 		this.activeGames = new Set();
@@ -9,12 +9,13 @@ export class TournamentView extends BaseComponent {
 
 	async onIni() {
 		await this.contentLoaded;
-		const element = this.getElementById("tournament-view");
-		if (!element) return;
+		this.element = this.getElementById("tournament-view");
+		if (!this.element) return;
 		
-		const menu = new TournamentMenu(element, this);
+		const menu = new TournamentMenu(this.element, this);
 		await menu.initialize();
 		this.pollInterval = setInterval(() => menu.poll(), 5000);
+		// beforeunload event to clean up games ?
 	}
 
 	registerGame(game) {
@@ -23,6 +24,21 @@ export class TournamentView extends BaseComponent {
 
 	unregisterGame(game) {
 		this.activeGames.delete(game);
+	}
+
+	insertBackButton() {
+		const backButton = document.createElement('button');
+		backButton.textContent = "Back to Tournament";
+		backButton.classList.add('btn', 'btn-outline-light', 'tournament-back-button'); 
+		this.element.appendChild(backButton);
+		
+		backButton.addEventListener('click', () => {
+			this.activeGames.forEach(game => game.cleanup());
+			this.activeGames.clear();  
+			const hash = window.location.hash.substring(2);
+			Router.go(hash);
+		});
+		
 	}
 
 	onDestroy() {
@@ -155,16 +171,18 @@ class TournamentMenu {
 		gameContainer.classList.add('tournament-game-container', 'flex-grow-1', 'mb-3');
 		wrapper.appendChild(gameContainer);
 		
-		const backButton = document.createElement('button');
-		backButton.textContent = "Back to Tournament";
-		backButton.classList.add('btn', 'btn-outline-light', 'tournament-back-button'); 
-		wrapper.appendChild(backButton);
+		// const backButton = document.createElement('button');
+		// backButton.textContent = "Back to Tournament";
+		// backButton.classList.add('btn', 'btn-outline-light', 'tournament-back-button'); 
+		// wrapper.appendChild(backButton);
 		
-		backButton.addEventListener('click', () => {
-			this.view.activeGames.forEach(game => game.cleanup());
-			this.view.activeGames.clear();  
-			window.location.reload();
-		});
+		// backButton.addEventListener('click', () => {
+		// 	this.view.activeGames.forEach(game => game.cleanup());
+		// 	this.view.activeGames.clear();  
+		// 	// window.location.reload();
+		// 	const hash = window.location.hash.substring(2);
+		// 	Router.go(hash);
+		// });
 		
 		const tournamentLobby = new TournamentLobby(gameContainer, this.view, gameId);
 		tournamentLobby.startLobby();

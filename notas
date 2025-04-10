@@ -26,3 +26,24 @@ Minor module = Support on all devices
 TOTAL: 21
 
 UserAdmin Marvin Pass 12345
+
+
+
+
+check media server functionality in LAN
+check OAuth functionality in LAN
+
+
+new topic.
+
+ive created a new view in our app.
+
+its called ladderboard view, and obviously it should have a ladder board.
+in ourdjango html templatei want to present the users from highest to lowest rank 
+
+however id like to implement a sort of rebouncing like before, but in this case, we use bootstrap 5.3 lists and  pagination
+https://getbootstrap.com/docs/5.3/components/pagination/
+
+the rebouncing ideia would be to, on the first request, render only the first page with lets say, 5 elements,
+and only after that do requests for the following pages,
+this way we would have to query the whole user base at once.

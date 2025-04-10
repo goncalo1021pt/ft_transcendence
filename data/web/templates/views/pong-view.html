@@ -1,4 +1,15 @@
 <div id="pong-view" class="standard-view">
+	<div class="profile-info text-center">
+
+		<div class="container-fluid h-100" id="3d-pong-asset">
+		</div>
+		<div class="container-fluid h-100" id="user-info">
+			<h3>{{ user.username }}</h3>
+			<p id="pong-view-rank">Rank: <span>{{ user.rank }}</span></p>
+		</div>
+
+
+	</div>
     <div class="pong-menu-container">
         <div class="pong-menu">
             <button id="start-versus" class="pong-menu-button btn btn-outline-light btn-lg mb-3 game-button">

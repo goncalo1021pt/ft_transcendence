@@ -11,6 +11,10 @@
 
 }
 
+#pong-view-rank {
+	padding-bottom: 1rem;
+}
+
 .pong-menu {
     display: flex;
     flex-direction: column;

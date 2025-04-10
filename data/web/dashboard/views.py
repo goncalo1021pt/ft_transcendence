@@ -52,7 +52,6 @@ def profile_view(request, username=None):
 	}
 
 	if is_own_profile:
-		logger.debug(target_user.is_42_user)
 		context['account'] = {
 			'username': target_user.username,
 			'email': target_user.email,
@@ -108,3 +107,18 @@ def update_profile(request):
 
 
 
+@require_http_methods(["GET"])
+def find_user(request):
+	if not request.user.is_authenticated:
+		return HttpResponseForbidden('Not authenticated')
+		
+	query = request.GET.get('q', '').strip()
+	if not query or len(query) < 2:
+		return JsonResponse({'results': []})
+
+	matching_users = User.objects.filter(
+		username__icontains=query
+	).values('username', 'profile_pic')[:10]
+	
+	results = list(matching_users)
+	return JsonResponse({'results': results})
