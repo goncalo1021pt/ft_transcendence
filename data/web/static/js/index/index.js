@@ -10,6 +10,7 @@ import { LoginView } from '../login/LoginView.js';
 import { AuthService } from '../index/AuthService.js';
 import { TwofactorView } from '../login/TwoFactorView.js';
 import { LadderboardView } from '../ladderboard/LadderboardView.js';
+import { LanguageView } from '../nav/LanguageMenu.js';
 
 
 Router.subscribe('home', HomeView);
@@ -20,6 +21,7 @@ Router.subscribe('register', RegisterView);
 Router.subscribe('login', LoginView);
 Router.subscribe('two-factor', TwofactorView);
 Router.subscribe('ladderboard', LadderboardView);
+Router.subscribe('language', LanguageView);
 
 
 await AuthService.init();

@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="pong-view" class="standard-view">
 	<div class="profile-info text-center">
 
@@ -5,31 +6,30 @@
 		</div>
 		<div class="container-fluid h-100" id="user-info">
 			<h3>{{ user.username }}</h3>
-			<p id="pong-view-rank">Rank: <span>{{ user.rank }}</span></p>
+			<p id="pong-view-rank">{% trans "Rank:" %} <span>{{ user.rank }}</span></p>
 		</div>
-
 
 	</div>
     <div class="pong-menu-container">
         <div class="pong-menu">
             <button id="start-versus" class="pong-menu-button btn btn-outline-light btn-lg mb-3 game-button">
-                <i class="bi bi-people-fill me-2"></i> Versus Mode
-                <span class="button-description">Play against a friend locally</span>
+                <i class="bi bi-people-fill me-2"></i> {% trans "Versus Mode" %}
+                <span class="button-description">{% trans "Play against a friend locally" %}</span>
             </button>
             
             <button id="start-ai" class="pong-menu-button btn btn-outline-light btn-lg mb-3 game-button">
-                <i class="bi bi-cpu-fill me-2"></i> AI Challenge
-                <span class="button-description">Test your skills against a trained AI</span>
+                <i class="bi bi-cpu-fill me-2"></i> {% trans "AI Challenge" %}
+                <span class="button-description">{% trans "Test your skills against a trained AI" %}</span>
             </button>
             
             <button id="start-quick" class="pong-menu-button btn btn-outline-light btn-lg mb-3 game-button">
-                <i class="bi bi-lightning-fill me-2"></i> Quick Match
-                <span class="button-description">Find an online opponent</span>
+                <i class="bi bi-lightning-fill me-2"></i> {% trans "Quick Match" %}
+                <span class="button-description">{% trans "Find an online opponent" %}</span>
             </button>
             
             <button id="start-tournament" class="pong-menu-button btn btn-outline-light btn-lg game-button">
-                <i class="bi bi-trophy-fill me-2"></i> Tournament
-                <span class="button-description">Compete in bracket-style tournaments</span>
+                <i class="bi bi-trophy-fill me-2"></i> {% trans "Tournament" %}
+                <span class="button-description">{% trans "Compete in bracket-style tournaments" %}</span>
             </button>
         </div>
     </div>

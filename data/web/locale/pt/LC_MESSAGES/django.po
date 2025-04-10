@@ -1,0 +1,366 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-10 17:57+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/views/home-view.html:9
+msgid "REAL-TIME MATCHES"
+msgstr "PARTIDAS EM TEMPO REAL"
+
+#: templates/views/home-view.html:10
+msgid "Challenge opponents from around the world in lightning-fast games"
+msgstr "Desafie adversários de todo o mundo em jogos ultrarrápidos"
+
+#: templates/views/home-view.html:14
+msgid "TOURNAMENTS"
+msgstr "TORNEIOS"
+
+#: templates/views/home-view.html:15
+msgid "Compete in daily and weekly tournaments to claim ultimate glory"
+msgstr "Compete em torneios diários e semanais para alcançar a glória suprema"
+
+#: templates/views/home-view.html:19
+msgid "CUSTOM PROFILES"
+msgstr "PERFIS PERSONALIZADOS"
+
+#: templates/views/home-view.html:20
+msgid "Create your unique identity and showcase your achievements"
+msgstr "Crie a sua identidade única e exiba as suas conquistas"
+
+#: templates/views/home-view.html:28
+msgid "PLAYERS"
+msgstr "JOGADORES"
+
+#: templates/views/home-view.html:32
+msgid "MATCHES"
+msgstr "PARTIDAS"
+
+#: templates/views/home-view.html:36
+msgid "CHAMPIONS"
+msgstr "CAMPEÕES"
+
+#: templates/views/login-view.html:5 templates/views/profile-view.html:283
+msgid "Username"
+msgstr "Nome de Utilizador"
+
+#: templates/views/login-view.html:8
+#, fuzzy
+#| msgid "Change Password"
+msgid "Password"
+msgstr "Alterar Palavra-passe"
+
+#: templates/views/login-view.html:10
+msgid "Login"
+msgstr "Inicie sessão"
+
+#: templates/views/login-view.html:13
+msgid "Log in with 42 account"
+msgstr "Inicie sessão com a conta 42"
+
+#: templates/views/login-view.html:16
+msgid "Don't have an account? Register"
+msgstr "Não tem uma conta? Registe-se"
+
+#: templates/views/login-view.html:20
+msgid "2FA Code"
+msgstr "Código 2FA"
+
+#: templates/views/login-view.html:22
+msgid "Verify 2FA"
+msgstr "Verificar 2FA"
+
+#: templates/views/pong-view.html:9 templates/views/profile-view.html:243
+msgid "Rank:"
+msgstr "Classificação:"
+
+#: templates/views/pong-view.html:16
+msgid "Versus Mode"
+msgstr "Modo Versus"
+
+#: templates/views/pong-view.html:17
+msgid "Play against a friend locally"
+msgstr "Jogue contra um amigo localmente"
+
+#: templates/views/pong-view.html:21
+msgid "AI Challenge"
+msgstr "Desafio IA"
+
+#: templates/views/pong-view.html:22
+msgid "Test your skills against a trained AI"
+msgstr "Teste as suas habilidades contra uma IA treinada"
+
+#: templates/views/pong-view.html:26
+msgid "Quick Match"
+msgstr "Partida Rápida"
+
+#: templates/views/pong-view.html:27
+msgid "Find an online opponent"
+msgstr "Encontre um adversário online"
+
+#: templates/views/pong-view.html:31
+msgid "Tournament"
+msgstr "Torneio"
+
+#: templates/views/pong-view.html:32
+msgid "Compete in bracket-style tournaments"
+msgstr "Compita em torneios no formato de eliminatórias"
+
+#: templates/views/profile-view.html:13
+msgid "Online"
+msgstr "Online"
+
+#: templates/views/profile-view.html:13
+msgid "Offline"
+msgstr "Offline"
+
+#: templates/views/profile-view.html:19
+msgid "Add Friend"
+msgstr "Adicionar Amigo"
+
+#: templates/views/profile-view.html:23
+msgid "Cancel Request"
+msgstr "Cancelar Pedido"
+
+#: templates/views/profile-view.html:28 templates/views/profile-view.html:205
+msgid "Accept"
+msgstr "Aceitar"
+
+#: templates/views/profile-view.html:31 templates/views/profile-view.html:211
+msgid "Reject"
+msgstr "Rejeitar"
+
+#: templates/views/profile-view.html:36
+msgid "Remove Friend"
+msgstr "Remover Amigo"
+
+#: templates/views/profile-view.html:48
+msgid "About"
+msgstr "Sobre"
+
+#: templates/views/profile-view.html:51
+msgid "Stats"
+msgstr "Estatísticas"
+
+#: templates/views/profile-view.html:54
+msgid "Match History"
+msgstr "Histórico de Partidas"
+
+#: templates/views/profile-view.html:58 templates/views/profile-view.html:174
+msgid "Friends"
+msgstr "Amigos"
+
+#: templates/views/profile-view.html:66
+msgid "Account"
+msgstr "Conta"
+
+#: templates/views/profile-view.html:84
+msgid "First joined:"
+msgstr "Primeira entrada:"
+
+#: templates/views/profile-view.html:88
+msgid "Last seen:"
+msgstr "Última visualização:"
+
+#: templates/views/profile-view.html:102
+msgid "Total Games"
+msgstr "Total de Jogos"
+
+#: templates/views/profile-view.html:106
+msgid "Wins"
+msgstr "Vitórias"
+
+#: templates/views/profile-view.html:110
+msgid "Losses"
+msgstr "Derrotas"
+
+#: templates/views/profile-view.html:126
+msgid "Result"
+msgstr "Resultado"
+
+#: templates/views/profile-view.html:127
+msgid "Score"
+msgstr "Pontuação"
+
+#: templates/views/profile-view.html:128
+msgid "Date"
+msgstr "Data"
+
+#: templates/views/profile-view.html:129
+msgid "Game ID"
+msgstr "ID do Jogo"
+
+#: templates/views/profile-view.html:130
+msgid "Opponent"
+msgstr "Adversário"
+
+#: templates/views/profile-view.html:138
+msgid "WIN"
+msgstr "VITÓRIA"
+
+#: templates/views/profile-view.html:138
+msgid "LOSS"
+msgstr "DERROTA"
+
+#: templates/views/profile-view.html:157
+msgid "No match history available"
+msgstr "Nenhum histórico de partidas disponível"
+
+#: templates/views/profile-view.html:170
+msgid "Find user..."
+msgstr "Encontrar Utilizador..."
+
+#: templates/views/profile-view.html:182
+msgid "Friend Requests"
+msgstr "Pedidos de Amizade"
+
+#: templates/views/profile-view.html:193
+msgid "Incoming"
+msgstr "Recebidos"
+
+#: templates/views/profile-view.html:195
+msgid "Sent"
+msgstr "Enviados"
+
+#: templates/views/profile-view.html:218 templates/views/profile-view.html:275
+#: templates/views/profile-view.html:358
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: templates/views/profile-view.html:262
+msgid "No friends yet"
+msgstr "Ainda sem amigos"
+
+#: templates/views/profile-view.html:271
+msgid "Account Settings"
+msgstr "Configurações da Conta"
+
+#: templates/views/profile-view.html:273
+msgid "Edit Profile"
+msgstr "Editar Perfil"
+
+#: templates/views/profile-view.html:274
+msgid "Save Changes"
+msgstr "Guardar Alterações"
+
+#: templates/views/profile-view.html:288
+msgid "Email"
+msgstr "Email"
+
+#: templates/views/profile-view.html:293
+msgid "About Me"
+msgstr "Sobre Mim"
+
+#: templates/views/profile-view.html:298
+msgid "Profile Picture"
+msgstr "Foto de Perfil"
+
+#: templates/views/profile-view.html:300
+msgid "Change Profile Picture"
+msgstr "Alterar Foto de Perfil"
+
+#: templates/views/profile-view.html:303
+msgid "Select new profile picture:"
+msgstr "Selecione uma nova foto de perfil:"
+
+#: templates/views/profile-view.html:326
+msgid "Security Settings"
+msgstr "Configurações de Segurança"
+
+#: templates/views/profile-view.html:339
+msgid "Password Security"
+msgstr "Segurança da Palavra-passe"
+
+#: templates/views/profile-view.html:343
+msgid "Change Password"
+msgstr "Alterar Palavra-passe"
+
+#: templates/views/profile-view.html:355
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: templates/views/profile-view.html:372
+msgid "Two-Factor Authentication"
+msgstr "Autenticação de Dois Fatores"
+
+#: templates/views/profile-view.html:375
+msgid "A 2FA method is a good way to add an extra layer of security to your account."
+msgstr "Um método 2FA é uma boa forma de adicionar uma camada extra de segurança à sua conta."
+
+#: templates/views/profile-view.html:383
+msgid "ON"
+msgstr "ATIVADO"
+
+#: templates/views/profile-view.html:383
+msgid "OFF"
+msgstr "DESATIVADO"
+
+#: templates/views/register-view.html:19
+msgid "Register"
+msgstr "Registar"
+
+#: templates/views/tournament-view.html:8
+msgid "Previous Tournament"
+msgstr "Torneio Anterior"
+
+#: templates/views/tournament-view.html:12
+msgid "no history..."
+msgstr "sem histórico..."
+
+#: templates/views/tournament-view.html:20
+msgid "Active Tournaments"
+msgstr "Torneios Ativos"
+
+#: templates/views/tournament-view.html:29
+msgid "Create Tournament"
+msgstr "Criar Torneio"
+
+#: templates/views/tournament-view.html:30
+msgid "Join Tournament"
+msgstr "Participar no Torneio"
+
+#: templates/views/tournament-view.html:31
+msgid "Leave Tournament"
+msgstr "Sair do Torneio"
+
+#: templates/views/tournament-view.html:38
+msgid "Tournament Status"
+msgstr "Estado do Torneio"
+
+#: templates/views/tournament-view.html:41
+msgid "Not in tournament"
+msgstr "Não está em nenhum torneio"
+
+#: templates/views/twoFactor-view.html:6
+msgid "Link you App to your Transcendence account"
+msgstr "Ligue a sua App à sua conta Transcendence"
+
+#: templates/views/twoFactor-view.html:7
+msgid "Scan the QR code below with your authenticator app to enable 2FA:"
+msgstr "Digitalize o código QR abaixo com a sua app autenticadora para ativar o 2FA:"
+
+#: templates/views/twoFactor-view.html:11
+msgid "Next"
+msgstr "Próximo"
+
+#: templates/views/twoFactor-view.html:15
+msgid "Enter the 2FA code generated by your authenticator app:"
+msgstr "Insira o código 2FA gerado pela sua app autenticadora:"
+
+#: templates/views/twoFactor-view.html:17
+msgid "Verify"
+msgstr "Verificar"

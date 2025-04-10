@@ -4,6 +4,8 @@ from django.http import JsonResponse, HttpResponse, HttpResponseForbidden
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.utils.translation import activate
+from django.shortcuts import redirect
 from backend.models import User
 from pong.models import OngoingGame
 from tournaments.models import Tournament
@@ -20,6 +22,7 @@ logger = logging.getLogger('pong')
 
 @require_http_methods(["GET"])
 def profile_view(request, username=None):
+	activate(request.session.get('django_language', 'en'))
 	if not request.user.is_authenticated:
 		return HttpResponseForbidden('Not authenticated')
 
@@ -122,3 +125,14 @@ def find_user(request):
 	
 	results = list(matching_users)
 	return JsonResponse({'results': results})
+
+def set_language(request):
+    lang_code = request.GET.get('lang', 'en')
+    logger.debug(f"Session before setting language: {request.session.items()}")
+    if lang_code in dict(settings.LANGUAGES):
+        request.session['django_language'] = lang_code
+        activate(lang_code)
+    logger.debug(f"Session after setting language: {request.session.items()}")
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+		

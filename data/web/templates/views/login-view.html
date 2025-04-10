@@ -1,24 +1,25 @@
+{% load i18n %}
 <div id="login-view" class="standard-view">
 	<form id="login-form" class="auth-form">
 		<div class="form-group">
-			<input type="text" id="username" name="username" placeholder="Username" required>
+			<input type="text" id="username" name="username" placeholder={% trans "Username" %} required>
 		</div>
 		<div class="form-group">
-			<input type="password" id="password" name="password" placeholder="Password" required>
+			<input type="password" id="password" name="password" placeholder={% trans "Password" %} required>
 		</div>
-		<button type="submit">Login</button>
+		<button type="submit">{% trans "Login" %}</button>
 		<button type="button" id="login_42" class="login-button">
 			<img src="/static/images/42-logo.png" alt="42 Logo" class="button-logo">
-			Log in with 42 account
+			{% trans "Log in with 42 account" %}
 		</button>
 		<div id="form-errors" class="error-messages"></div>
-		<a href="#/register" class="auth-link">Don't have an account? Register</a>
+		<a href="#/register" class="auth-link">{% trans "Don't have an account? Register" %}</a>
 	</form>
 	<form id="2fa-form" class="auth-form" style="display: none;">
 		<div class="form-group">
-			<input type="text" id="2fa-code" name="2fa-code" placeholder="2FA Code" required>
+			<input type="text" id="2fa-code" name="2fa-code" placeholder={% trans "2FA Code" %} required>
 		</div>
-		<button type="submit" class="login-button" autocomplete="off">Verify 2FA </button>
+		<button type="submit" class="login-button" autocomplete="off">{% trans "Verify 2FA" %} </button>
 		<div id="form-errors" class="error-messages"></div>
 	</form>
 </div>

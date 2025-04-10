@@ -5,6 +5,8 @@ from django.views.decorators.http import require_http_methods
 from .models import User
 from pong.models import CompletedGame
 from tournaments.models import Tournament
+from django.utils.translation import activate, get_language
+
 import logging
 
 logger = logging.getLogger('pong')
@@ -18,6 +20,9 @@ def index(request):
 
 
 def home_view(request):
+	logger.debug(f"Session contents: {request.session.items()}")
+	logger.debug(f"Active language: {get_language()}")
+	activate(request.session.get('django_language', 'en'))
 	context = {
 		'stats': {
 			"players" : User.objects.count(),
@@ -29,11 +34,16 @@ def home_view(request):
 
 
 def nav_menu(request):
+	activate(request.session.get('django_language', 'en'))
 	return render(request, 'menus/nav-menu.html')
 
+def language_menu(request):
+	activate(request.session.get('django_language', 'en'))
+	return render(request, 'menus/language-menu.html')
 
 @require_http_methods(["GET"])
 def login_menu(request):
+	activate(request.session.get('django_language', 'en'))
 	context = {
 		'is_authenticated': request.user.is_authenticated,
 		'username': request.user.username if request.user.is_authenticated else '',
@@ -47,35 +57,33 @@ def login_menu(request):
 
 
 def pong_view(request):
+	activate(request.session.get('django_language', 'en'))
 	if request.user.is_authenticated:
 		return render(request, 'views/pong-view.html')
 	return HttpResponseForbidden('Not authenticated')
 
-
-# def profile_view(request):
-# 	if request.user.is_authenticated:
-# 		return render(request, 'views/profile-view.html', {'user': request.user})
-# 	return HttpResponseForbidden('Not authenticated')
-
-
 def login_view(request):
+	activate(request.session.get('django_language', 'en'))
 	if request.user.is_authenticated:
 		return redirect('home-view')
 	return render(request, 'views/login-view.html')
 
 
 def register_view(request):
+	activate(request.session.get('django_language', 'en'))
 	if request.user.is_authenticated:
 		return redirect('home-view')
 	return render(request, 'views/register-view.html')
 
 
 def tournament_view(request):
+	activate(request.session.get('django_language', 'en'))
 	if request.user.is_authenticated:
 		return render(request, 'views/tournament-view.html')
 	return HttpResponseForbidden('Not authenticated')
 
 def twoFactor_view(request):
+	activate(request.session.get('django_language', 'en'))
 	user = request.user
 	if user.is_authenticated:
 		logger.debug(f"{user.is_42_user}")
@@ -86,7 +94,11 @@ def twoFactor_view(request):
 	return HttpResponseForbidden('Not authenticated')
 
 def ladderboard_view(request):
+	activate(request.session.get('django_language', 'en'))
 	if request.user.is_authenticated:
 		return render(request, 'views/ladderboard-view.html')
 	return HttpResponseForbidden('Not authenticated')
 
+def language_menu(request):
+	activate(request.session.get('django_language', 'en'))
+	return render(request, 'menus/language-menu.html')

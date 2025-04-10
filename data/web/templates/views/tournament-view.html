@@ -1,14 +1,15 @@
+{% load i18n %}
 <div id="tournament-view" class="standard-view">
   <div class="container-fluid h-100" id="tournament-container">
       <div id="tournament-content">
         <!-- Tournament History Section -->
         <div class="card mb-4 bg-transparent">
           <div class="card-header bg-dark bg-opacity-75">
-            <h5 class="card-title text-light mb-0">Previous Tournament</h5>
+            <h5 class="card-title text-light mb-0">{% trans "Previous Tournament" %}</h5>
           </div>
           <div class="card-body bg-dark bg-opacity-50">
             <div id="last-tournament">
-              <div class="no-history text-secondary">no history...</div>
+              <div class="no-history text-secondary">{% trans "no history..." %}</div>
             </div>
           </div>
         </div>
@@ -16,7 +17,7 @@
         <!-- Active Tournaments Section -->
         <div class="card mb-4 bg-transparent">
           <div class="card-header bg-dark bg-opacity-75">
-            <h5 class="card-title text-light mb-0">Active Tournaments</h5>
+            <h5 class="card-title text-light mb-0">{% trans "Active Tournaments" %}</h5>
           </div>
           <div class="card-body bg-dark bg-opacity-50 p-0">
             <div id="tournaments-container" class="scrollable-tournaments list-group list-group-flush"></div>
@@ -25,19 +26,19 @@
         
         <!-- Tournament Actions -->
         <div class="tournament-actions d-flex gap-2 mb-4">
-          <button id="create-tournament" class="btn btn-outline-light tournament-button">Create Tournament</button>
-          <button id="join-tournament" class="btn btn-outline-light tournament-button">Join Tournament</button>
-          <button id="leave-tournament" class="btn btn-outline-danger tournament-button d-none">Leave Tournament</button>
+          <button id="create-tournament" class="btn btn-outline-light tournament-button">{% trans "Create Tournament" %}</button>
+          <button id="join-tournament" class="btn btn-outline-light tournament-button">{% trans "Join Tournament" %}</button>
+          <button id="leave-tournament" class="btn btn-outline-danger tournament-button d-none">{% trans "Leave Tournament" %}</button>
           <div id="tournament-errors" class="error-messages text-danger ms-2 align-self-center"></div>
         </div>
         
         <!-- Tournament Status Section -->
         <div class="card mb-4 bg-transparent">
           <div class="card-header bg-dark bg-opacity-75">
-            <h5 class="card-title text-light mb-0">Tournament Status</h5>
+            <h5 class="card-title text-light mb-0">{% trans "Tournament Status" %}</h5>
           </div>
           <div class="card-body bg-dark bg-opacity-50">
-            <div id="tournament-state" class="text-secondary">Not in tournament</div>
+            <div id="tournament-state" class="text-secondary">{% trans "Not in tournament" %}</div>
           </div>
         </div>
       </div>

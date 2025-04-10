@@ -1,42 +1,39 @@
+{% load i18n %}
 <div id="home-view" class="standard-view">
     <!-- Hero Section -->
 	<h1 class="glitch-text">TRANSCENDENCE</h1>
-
     <!-- Features Section -->
-	<div class="feature-cards">
-		<div class="feature-card">
-			<div class="feature-icon">🎮</div>
-			<h3>REAL-TIME MATCHES</h3>
-			<p>Challenge opponents from around the world in lightning-fast games</p>
-		</div>
-		<div class="feature-card">
-			<div class="feature-icon">🏆</div>
-			<h3>TOURNAMENTS</h3>
-			<p>Compete in daily and weekly tournaments to claim ultimate glory</p>
-		</div>
-		<div class="feature-card">
-			<div class="feature-icon">👤</div>
-			<h3>CUSTOM PROFILES</h3>
-			<p>Create your unique identity and showcase your achievements</p>
-		</div>
-	</div>
+    <div class="feature-cards">
+        <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <h3>{% trans "REAL-TIME MATCHES" %}</h3>
+            <p>{% trans "Challenge opponents from around the world in lightning-fast games" %}</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h3>{% trans "TOURNAMENTS" %}</h3>
+            <p>{% trans "Compete in daily and weekly tournaments to claim ultimate glory" %}</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👤</div>
+            <h3>{% trans "CUSTOM PROFILES" %}</h3>
+            <p>{% trans "Create your unique identity and showcase your achievements" %}</p>
+        </div>
+    </div>
 
     <!-- Community Section -->
-
-	<div class="stats-counter">
-		<div class="stat">
-			<span class="stat-number"> {{stats.players}} </span>
-			<span class="stat-label">PLAYERS</span>
-		</div>
-		<div class="stat">
-			<span class="stat-number">{{stats.games}}</span>
-			<span class="stat-label">MATCHES</span>
-		</div>
-		<div class="stat">
-			<span class="stat-number">{{stats.champions}}</span>
-			<span class="stat-label">CHAMPIONS</span>
-		</div>
-	</div>
-
-
+    <div class="stats-counter">
+        <div class="stat">
+            <span class="stat-number">{{ stats.players }}</span>
+            <span class="stat-label">{% trans "PLAYERS" %}</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">{{ stats.games }}</span>
+            <span class="stat-label">{% trans "MATCHES" %}</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">{{ stats.champions }}</span>
+            <span class="stat-label">{% trans "CHAMPIONS" %}</span>
+        </div>
+    </div>
 </div>

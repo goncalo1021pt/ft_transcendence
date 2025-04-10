@@ -40,6 +40,21 @@ LOGGING = {
 		},
 	}
 }
+
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+LANGUAGE_CODE = 'en-us'
+LANGUAGES = [
+	('en', 'English'),
+	('pt', 'Portuguese'),
+	('fr', 'French'),
+]
+
+LOCALE_PATHS = [
+	BASE_DIR / 'locale',
+]
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -112,6 +127,7 @@ AUTH_USER_MODEL = 'backend.User'
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.locale.LocaleMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',

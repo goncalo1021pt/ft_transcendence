@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="profile-view" class="standard-view">
 	<div class="container-fluid h-100">
 		<div class="row h-100">
@@ -9,30 +10,30 @@
 					<h2>{{ user.username }}</h2>
 					<p>Rank: <span>{{ rank }}</span></p>
 					{% if not own_profile %}
-					<p>Status: <span>{% if status == "online" %} Online {% else %}Offline{% endif %}</span></p>
+					<p>Status: <span>{% if status == "online" %} {% trans "Online" %} {% else %}{% trans "Offline" %}{% endif %}</span></p>
 					{% endif %}
 					{% if not own_profile %}
 					<div class="mt-3">
 						{% if friends.friendship_status == 'none' %}
 						<button id="friend-button" class="btn btn-primary" data-action="send-request" data-request-id="{{ user.username }}"> 
-							<i class="fas fa-user-plus"></i> Add Friend
+							<i class="fas fa-user-plus"></i> {% trans "Add Friend" %}
 						</button>
 						{% elif friends.friendship_status == 'pending_sent' %}
 						<button id="friend-button" class="btn btn-secondary" data-action="cancel-request" data-request-id="{{ user.username }}">
-							<i class="fas fa-clock"></i> Cancel Request
+							<i class="fas fa-clock"></i> {% trans "Cancel Request" %}
 						</button>
 						{% elif friends.friendship_status == 'pending_received' %}
 						<div class="btn-group">
 							<button id="accept-friend-button" class="btn btn-success" data-action="accept-request" data-request-id="{{ user.username }}">
-								<i class="fas fa-check"></i> Accept
+								<i class="fas fa-check"></i> {% trans "Accept" %}
 							</button>
 							<button id="reject-friend-button" class="btn btn-danger" data-action="reject-request" data-request-id="{{ user.username }}">
-								<i class="fas fa-times"></i> Reject
+								<i class="fas fa-times"></i> {% trans "Reject" %}
 							</button>
 						</div>
 						{% elif friends.friendship_status == 'friends' %}
 						<button id="friend-button" class="btn btn-outline-danger" data-action="remove-friend" data-request-id="{{ user.username }}">
-							<i class="fas fa-user-minus"></i> Remove Friend
+							<i class="fas fa-user-minus"></i> {% trans "Remove Friend" %}
 						</button>
 						{% endif %}
 					</div>
@@ -44,17 +45,17 @@
 				<div id="profile-top-container" class="row">
 					<ul class="nav nav-tabs" id="profileTabs" role="tablist">
 						<li class="nav-item" role="presentation">
-							<button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab" >About</button>
+							<button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab" >{% trans "About" %}</button>
 						</li>
 						<li class="nav-item" role="presentation">
-							<button class="nav-link" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats" type="button" role="tab" >Stats</button>
+							<button class="nav-link" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats" type="button" role="tab" >{% trans "Stats" %}</button>
 						</li>
 						<li class="nav-item" role="presentation">
-							<button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab" >Match History</button>
+							<button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab" >{% trans "Match History" %}</button>
 						</li>
 						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="friends-tab" data-bs-toggle="tab" data-bs-target="#friends" type="button" role="tab" >
-								Friends 
+								{% trans "Friends" %} 
 								{% if own_profile and friends.pending_received.list %}
 									<span class="badge bg-danger rounded-pill ms-1">{{ friends.pending_received.list|length }}</span>
 								{% endif %}
@@ -62,7 +63,7 @@
 						</li>
 						{% if own_profile %}
 						<li class="nav-item" role="presentation">
-							<button class="nav-link" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" >Account</button>
+							<button class="nav-link" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" >{% trans "Account" %}</button>
 						</li>
 						{% endif %}
 					</ul>
@@ -80,11 +81,11 @@
 										<span style="color: #6c757d;">{{ about.uuid }}</span>
 									</p>
 									<p>
-										<strong style="color: #6c757d;">First joined:</strong> 
+										<strong style="color: #6c757d;">{% trans "First joined:" %}</strong> 
 										<span style="color: #6c757d;">{{ about.first_joined }}</span>
 									</p>
 									<p>
-										<strong style="color: #6c757d;">Last seen:</strong>
+										<strong style="color: #6c757d;">{% trans "Last seen:" %}</strong>
 										<span style="color: #6c757d;">{{ about.last_seen }}</span>
 									</p>
 								</div>
@@ -98,15 +99,15 @@
 								<div class="card-body">
 									<div class="row text-center">
 										<div class="col-md-4">
-											<h5 style="color: #6c757d;">Total Games</h5>
+											<h5 style="color: #6c757d;">{% trans "Total Games" %}</h5>
 											<p class="display-4" style="color: #6c757d;">{{ stats.total }}</p>
 										</div>
 										<div class="col-md-4">
-											<h5 style="color: #6c757d;">Wins</h5>
+											<h5 style="color: #6c757d;">{% trans "Wins" %}</h5>
 											<p class="display-4 text-success">{{ stats.total_w }}</p>
 										</div>
 										<div class="col-md-4">
-											<h5 style="color: #6c757d;">Losses</h5>
+											<h5 style="color: #6c757d;">{% trans "Losses" %}</h5>
 											<p class="display-4 text-danger">{{ stats.total_l }}</p>
 										</div>
 									</div>
@@ -122,11 +123,11 @@
 								<table class="table">
 									<thead class="table-light">
 										<tr>
-											<th>Result</th>
-											<th>Score</th>
-											<th>Date</th>
-											<th>Game ID</th>
-											<th>Opponent</th>
+											<th>{% trans "Result" %}</th>
+											<th>{% trans "Score" %}</th>
+											<th>{% trans "Date" %}</th>
+											<th>{% trans "Game ID" %}</th>
+											<th>{% trans "Opponent" %}</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -134,7 +135,7 @@
 										<tr class="{% if game.position == 'p1' %}table-primary{% else %}table-danger{% endif %}">
 											<td>
 												<span class="badge {% if game.result == 'win' %}bg-success{% else %}bg-dark{% endif %}">
-													{% if game.result == 'win' %}🏆 WIN{% else %}💩 LOSS{% endif %}
+													{% if game.result == 'win' %}🏆 {% trans "WIN" %}{% else %}💩 {% trans "LOSS" %}{% endif %}
 												</span>
 											</td>
 											<td>{{ game.score }}</td>
@@ -153,7 +154,7 @@
 										</tr>
 										{% empty %}
 										<tr>
-											<td colspan="5" class="text-center">No match history available</td>
+											<td colspan="5" class="text-center">{% trans "No match history available" %}</td>
 										</tr>
 										{% endfor %}
 									</tbody>
@@ -166,11 +167,11 @@
 							
 							{% if own_profile %}
 							<div class="d-flex justify-content-end mb-3" id="friend-search-container">
-								<input type="search" class="form-control form-control-sm w-25" placeholder="Find user..." id="friend-search-field">
+								<input type="search" class="form-control form-control-sm w-25" placeholder={% trans "Find user..." %} id="friend-search-field">
 							</div>
 							{% endif %}
 
-							<h4>Friends</h4>
+							<h4>{% trans "Friends" %}</h4>
 							
 							<!-- Friend Requests Section (only visible on own profile) -->
 							{% if own_profile %}
@@ -178,7 +179,7 @@
 								{% if friends.pending_received.list or friends.pending_sent.list %}
 									<div class="card mb-4">
 										<div class="card-header bg-light">
-											<h5 class="mb-0">Friend Requests</h5>
+											<h5 class="mb-0">{% trans "Friend Requests" %}</h5>
 										</div>
 										<div class="list-group list-group-flush">
 											{% with all_requests=friends.pending_received.list|add:friends.pending_sent.list %}
@@ -189,9 +190,9 @@
 															<div>
 																<a href="#/profile/{{ request.username }}/" class="text-decoration-none">{{ request.username }}</a>
 																{% if request in friends.pending_received.list %}
-																	<span class="badge bg-primary ms-2">Incoming</span>
+																	<span class="badge bg-primary ms-2">{% trans "Incoming" %}</span>
 																{% else %}
-																	<span class="badge bg-secondary ms-2">Sent</span>
+																	<span class="badge bg-secondary ms-2">{% trans "Sent" %}</span>
 																{% endif %}
 															</div>
 														</div>
@@ -201,20 +202,20 @@
 																	class="btn btn-sm btn-success me-1" 
 																	data-action="accept-request"
 																	data-request-id="{{ request.username }}">
-																<i class="fas fa-check"></i> Accept
+																<i class="fas fa-check"></i> {% trans "Accept" %}
 															</button>
 															<button id="reject-friend-button" 
 																	class="btn btn-sm btn-danger" 
 																	data-action="reject-request"
 																	data-request-id="{{ request.username }}">
-																<i class="fas fa-times"></i> Reject
+																<i class="fas fa-times"></i> {% trans "Reject" %}
 															</button>
 															{% else %}
 															<button id="cancel-friend-button" 
 																	class="btn btn-sm btn-outline-secondary" 
 																	data-action="cancel-request"
 																	data-request-id="{{ request.username }}">
-																<i class="fas fa-clock"></i> Cancel
+																<i class="fas fa-clock"></i> {% trans "Cancel" %}
 															</button>
 															{% endif %}
 														</div>
@@ -239,7 +240,7 @@
 												<div class="d-flex justify-content-between align-items-center">
 													<h6 class="mb-0">{{ friend.username }}</h6>
 													<div>
-														<span class="badge bg-secondary me-2">Rank: {{ friend.rank }}</span>
+														<span class="badge bg-secondary me-2">{% trans "Rank:" %} {{ friend.rank }}</span>
 														<span class="badge {% if friend.status == 'online' %}bg-success{% else %}bg-secondary{% endif %} rounded-pill">
 															{{ friend.status }}
 														</span>
@@ -258,7 +259,7 @@
 									</a>
 									{% endfor %}
 								{% else %}
-									<div class="list-group-item text-center">No friends yet</div>
+									<div class="list-group-item text-center">{% trans "No friends yet" %}</div>
 								{% endif %}
 							</div>
 						</div>						
@@ -267,11 +268,11 @@
 						{% if own_profile %}
 						<div class="tab-pane fade" id="account" role="tabpanel">
 							<div class="d-flex justify-content-between align-items-center mb-3">
-								<h4>Account Settings</h4>
+								<h4>{% trans "Account Settings" %}</h4>
 								<div>
-									<button type="button" id="edit-profile-btn" class="btn btn-primary">Edit Profile</button>
-									<button type="button" id="save-profile-btn" class="btn btn-success d-none">Save Changes</button>
-									<button type="button" id="cancel-edit-btn" class="btn btn-secondary d-none ms-2">Cancel</button>
+									<button type="button" id="edit-profile-btn" class="btn btn-primary">{% trans "Edit Profile" %}</button>
+									<button type="button" id="save-profile-btn" class="btn btn-success d-none">{% trans "Save Changes" %}</button>
+									<button type="button" id="cancel-edit-btn" class="btn btn-secondary d-none ms-2">{% trans "Cancel" %}</button>
 								</div>
 							</div>
 
@@ -279,27 +280,27 @@
 								<div class="card-body">
 									<form id="profile-form">
 										<div class="mb-3">
-											<label for="username" class="form-label fw-bold" style="color: #6c757d;">Username</label>
+											<label for="username" class="form-label fw-bold" style="color: #6c757d;">{% trans "Username" %}</label>
 											<input type="text" class="form-control profile-field" id="username" value="{{ account.username }}" disabled>
 										</div>
 
 										<div class="mb-3">
-											<label for="email" class="form-label fw-bold" style="color: #6c757d;">Email</label>
+											<label for="email" class="form-label fw-bold" style="color: #6c757d;">{% trans "Email" %}</label>
 											<input type="email" class="form-control profile-field" id="email" value="{{ account.email }}" disabled>
 										</div>
 
 										<div class="mb-3">
-											<label for="about" class="form-label fw-bold" style="color: #6c757d;">About Me</label>
+											<label for="about" class="form-label fw-bold" style="color: #6c757d;">{% trans "About Me" %}</label>
 											<textarea class="form-control profile-field" id="about" rows="3" disabled>{{ account.about_me|default:"there is no about me property :)" }}</textarea>
 										</div>
 										{% if not user.is_42_user %}
 											<div class="mb-4 d-none" id="profile-pic-section">
-												<label class="form-label fw-bold" style="color: #6c757d;">Profile Picture</label>
+												<label class="form-label fw-bold" style="color: #6c757d;">{% trans "Profile Picture" %}</label>
 
-												<button type="button" id="change-picture-btn" class="btn btn-outline-primary">Change Profile Picture</button>
+												<button type="button" id="change-picture-btn" class="btn btn-outline-primary">{% trans "Change Profile Picture" %}</button>
 
 												<div id="profile-pic-options" class="d-none mt-3 p-3 border rounded">
-													<h6 class="form-label fw-bold mb-3" style="color: #6c757d;">Select new profile picture:</h6>
+													<h6 class="form-label fw-bold mb-3" style="color: #6c757d;">{% trans "Select new profile picture:" %}</h6>
 													<div class="row">
 														{% for pic in account.profile_pictures %}
 														<div class="col-md-2 mb-2">
@@ -322,7 +323,7 @@
 										{% if not user.is_42_user %}
 											<div class="text-center mt-4">
 												<button type="button" id="security-btn" class="btn btn-warning d-inline-flex align-items-center">
-													<span>Security Settings</span>
+													<span>{% trans "Security Settings" %}</span>
 													<i class="fas fa-caret-down ms-2" style="font-size: 1.2rem;"></i>
 												</button>
 
@@ -335,11 +336,11 @@
 																		<div class="card-body p-4">
 																			<div id="change-password-container" class="text-center">
 																				<h5 class="mb-3 fw-bold" style="color: #495057;">
-																					<i class="fas fa-key me-2"></i>Password Security
+																					<i class="fas fa-key me-2"></i>{% trans "Password Security" %}
 																				</h5>
 
 																				<button type="button" id="change-password-btn" class="btn btn-outline-secondary w-100">
-																					Change Password
+																					{% trans "Change Password" %}
 																				</button>
 
 																				<div id="password-fields" class="d-none mt-3">
@@ -351,10 +352,10 @@
 																					</div>
 																					<div class="d-flex justify-content-between">
 																						<button type="button" id="confirm-password-btn" class="btn btn-primary">
-																							Confirm
+																							{% trans "Confirm" %}
 																						</button>
 																						<button type="button" id="cancel-password-btn" class="btn btn-outline-secondary">
-																							Cancel
+																							{% trans "Cancel" %}
 																						</button>
 																					</div>
 																				</div>
@@ -368,10 +369,10 @@
 																			<div class="d-flex justify-content-between align-items-center mb-2">
 																				<div>
 																					<h5 class="mb-2 fw-bold" style="color: #495057;">
-																						<i class="fas fa-shield-alt me-2"></i>Two-Factor Authentication
+																						<i class="fas fa-shield-alt me-2"></i>{% trans "Two-Factor Authentication" %}
 																					</h5>
 																					<p class="mb-0" style="color: #495057; font-size: 0.9rem;">
-																						A 2FA method is a good way to add an extra layer of security to your account.
+																						{% trans "A 2FA method is a good way to add an extra layer of security to your account." %}
 																					</p>
 																				</div>
 																				<div class="form-check form-switch">
@@ -379,7 +380,7 @@
 																						{% if user.two_factor_enable %}checked{% endif %}>
 																					<label class="form-check-label" for="twoFactorToggle">
 																						<span class="badge {% if user.two_factor_enable %}bg-success{% else %}bg-secondary{% endif %} ms-1">
-																							{% if user.two_factor_enable %}ON{% else %}OFF{% endif %}
+																							{% if user.two_factor_enable %}{% trans "ON" %}{% else %}{% trans "OFF" %}{% endif %}
 																						</span>
 																					</label>
 																				</div>
