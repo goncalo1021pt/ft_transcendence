@@ -128,11 +128,9 @@ def find_user(request):
 
 def set_language(request):
     lang_code = request.GET.get('lang', 'en')
-    logger.debug(f"Session before setting language: {request.session.items()}")
     if lang_code in dict(settings.LANGUAGES):
         request.session['django_language'] = lang_code
         activate(lang_code)
-    logger.debug(f"Session after setting language: {request.session.items()}")
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 		

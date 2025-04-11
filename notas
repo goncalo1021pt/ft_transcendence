@@ -47,3 +47,21 @@ https://getbootstrap.com/docs/5.3/components/pagination/
 the rebouncing ideia would be to, on the first request, render only the first page with lets say, 5 elements,
 and only after that do requests for the following pages,
 this way we would have to query the whole user base at once.
+
+generate translations
+django-admin makemessages -l pt -l fr
+django-admin compilemessages
+
+major - django
+minor - bootstrap
+minor - PostgreSQL
+major - standart user Management
+major - 42 api
+major - remote players
+major - ai algo
+minor - user and stats dashboard
+minor - account deletion + editing
+major - 2fa and jwt
+major - 3d graphics
+minor - expand browser compatibility
+minor - multiple languages

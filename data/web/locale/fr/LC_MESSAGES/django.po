@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 17:57+0000\n"
+"POT-Creation-Date: 2025-04-11 11:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/menus/login-menu.html:21
+msgid "PROFILE"
+msgstr "PROFILS"
+
+#: templates/menus/login-menu.html:27
+msgid "LOG OUT"
+msgstr "DÉCONNEXION"
+
+#: templates/menus/login-menu.html:29
+msgid "LOG IN"
+msgstr "Connexion"
 
 #: templates/views/home-view.html:9
 msgid "REAL-TIME MATCHES"
@@ -84,7 +96,8 @@ msgstr "Code 2FA"
 msgid "Verify 2FA"
 msgstr "Vérifiez la 2FA"
 
-#: templates/views/pong-view.html:9 templates/views/profile-view.html:243
+#: templates/views/pong-view.html:9 templates/views/profile-view.html:11
+#: templates/views/profile-view.html:243
 msgid "Rank:"
 msgstr "Rang :"
 
@@ -121,6 +134,12 @@ msgid "Compete in bracket-style tournaments"
 msgstr "Participez à des tournois en style tableau"
 
 #: templates/views/profile-view.html:13
+#, fuzzy
+#| msgid "Stats"
+msgid "Status:"
+msgstr "Statistiques"
+
+#: templates/views/profile-view.html:13
 msgid "Online"
 msgstr "En ligne"
 
@@ -148,7 +167,7 @@ msgstr "Rejeter"
 msgid "Remove Friend"
 msgstr "Supprimer l'ami"
 
-#: templates/views/profile-view.html:48
+#: templates/views/profile-view.html:48 templates/views/profile-view.html:76
 msgid "About"
 msgstr "À propos"
 
@@ -156,7 +175,7 @@ msgstr "À propos"
 msgid "Stats"
 msgstr "Statistiques"
 
-#: templates/views/profile-view.html:54
+#: templates/views/profile-view.html:54 templates/views/profile-view.html:120
 msgid "Match History"
 msgstr "Historique des matchs"
 
@@ -175,6 +194,10 @@ msgstr "Première connexion :"
 #: templates/views/profile-view.html:88
 msgid "Last seen:"
 msgstr "Dernière activité :"
+
+#: templates/views/profile-view.html:97
+msgid "Player Statistics"
+msgstr "Statistiques du joueur"
 
 #: templates/views/profile-view.html:102
 msgid "Total Games"
@@ -221,8 +244,8 @@ msgid "No match history available"
 msgstr "Aucun historique de match disponible"
 
 #: templates/views/profile-view.html:170
-msgid "Find user..."
-msgstr "Trouver un utilisateur..."
+msgid "Find_user..."
+msgstr "Trouver_un_utilisateur..."
 
 #: templates/views/profile-view.html:182
 msgid "Friend Requests"

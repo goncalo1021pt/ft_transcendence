@@ -283,6 +283,10 @@
 	color: #ffffff;
 }
 
+.text-center {
+	color: transparent;
+}
+
 .nav-tabs .nav-link {
 	color: rgb(157, 148, 148); 
 	background-color: rgba(255, 255, 255, 0.1); 
@@ -321,10 +325,17 @@
 }
 
 .table-light {
-    --bs-table-color: none;
-    --bs-table-bg: #1a1a1a;
-    --bs-table-accent-bg: transparent;
-	border-color: #1a1a1a;
+    background-color: transparent !important; 
+    color: #ffffff !important; 
+    border-color: #1a1a1a !important; 
+}
+
+
+.table-light th {
+    background-color: transparent !important; 
+    color: #ffffff !important; 
+    border-bottom: 1px solid #1a1a1a !important; 
+    box-shadow: none !important; 
 }
 
 .table-primary {
@@ -334,12 +345,38 @@
     border-color: #1a1a1a;
 }
 
-.table-danger {
+#match-history-container .table-danger {
     background-image: linear-gradient(20deg, #f03633aa 0%, #2b80ffc2 100%) !important;
     background-color: transparent !important;
     --bs-table-bg: transparent;
     border-color: #1a1a1a;
 }
+
+/* #match-history-container .table {
+	border-radius: 5px !important;
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important; 
+}
+
+#match-history-container .table-responsive {
+	overflow: hidden;
+	border-radius: 5px;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#match-history-container .no-match-history {
+	background-color: #76767633 !important;
+	border-color: rgb(130 130 130 / 9%) !important;
+	border-radius: 5px !important;
+	padding: 0.5rem 1rem !important;
+	color: #b0cce8 !important;
+	text-align: center;
+	border: 1px solid rgba(255, 255, 255, 0.2) !important;
+	overflow: hidden;
+} */
+
+
+
 
 #friend-image-container {
 	width: 40px;
@@ -461,4 +498,19 @@
     transform: translateY(-2px); 
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.3); 
     text-decoration: none; 
+}
+
+.custom-heading {
+    margin-bottom: 1.5rem; /* Equivalent to mb-4 */
+    font-size: 2rem;
+    font-weight: bold;
+    color: white /* Adjust color as needed */
+}
+
+/* Custom class for paragraphs */
+.custom-paragraph {
+    margin-bottom: 1rem; /* Equivalent to mb-3 */
+    font-size: 1rem;
+    color: white; /* Adjust color as needed */
+    line-height: 1.5;
 }

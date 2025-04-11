@@ -1,5 +1,4 @@
 #!/bin/bash
-cd /ft_transcendence
 
 python manage.py makemigrations backend pong authservice tournaments dashboard
 

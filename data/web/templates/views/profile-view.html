@@ -8,9 +8,9 @@
 				</div>
 				<div class="profile-info text-center">
 					<h2>{{ user.username }}</h2>
-					<p>Rank: <span>{{ rank }}</span></p>
+					<p>{% trans "Rank:" %} <span>{{ rank }}</span></p>
 					{% if not own_profile %}
-					<p>Status: <span>{% if status == "online" %} {% trans "Online" %} {% else %}{% trans "Offline" %}{% endif %}</span></p>
+					<p>{% trans "Status:" %} <span>{% if status == "online" %} {% trans "Online" %} {% else %}{% trans "Offline" %}{% endif %}</span></p>
 					{% endif %}
 					{% if not own_profile %}
 					<div class="mt-3">
@@ -73,7 +73,7 @@
 
 						<!-- About Tab -->
 						<div class="tab-pane fade show active" id="about" role="tabpanel">
-							<h4>About {{ user.username }}</h4>
+							<h4>{% trans "About" %} {{ user.username }}</h4>
 							<div class="card">
 								<div class="card-body">
 									<p>
@@ -94,7 +94,7 @@
 
 						<!-- Stats Tab -->
 						<div class="tab-pane fade" id="stats" role="tabpanel">
-							<h4>Player Statistics</h4>
+							<h4>{% trans "Player Statistics" %}</h4>
 							<div class="card">
 								<div class="card-body">
 									<div class="row text-center">
@@ -117,9 +117,9 @@
 
 						<!-- Match History Tab -->
 						<div class="tab-pane fade" id="history" role="tabpanel">
-							<h4>Match History</h4>
+							<h4>{% trans "Match History" %}</h4>
 
-							<div class="table-responsive">
+							<div class="table-responsive" id="match-history-container">
 								<table class="table">
 									<thead class="table-light">
 										<tr>
@@ -149,12 +149,12 @@
 														</div>
 														<span>{{ game.opponent }}</span>
 													</div>
-												</a>	
+												</a>    
 											</td>
 										</tr>
 										{% empty %}
 										<tr>
-											<td colspan="5" class="text-center">{% trans "No match history available" %}</td>
+											<td colspan="5" class="text-center no-match-history">{% trans "No match history available" %}</td>
 										</tr>
 										{% endfor %}
 									</tbody>
@@ -167,7 +167,7 @@
 							
 							{% if own_profile %}
 							<div class="d-flex justify-content-end mb-3" id="friend-search-container">
-								<input type="search" class="form-control form-control-sm w-25" placeholder={% trans "Find user..." %} id="friend-search-field">
+								<input type="search" class="form-control form-control-sm w-25" placeholder={% trans "Find_user..." %} id="friend-search-field">
 							</div>
 							{% endif %}
 

@@ -20,8 +20,6 @@ def index(request):
 
 
 def home_view(request):
-	logger.debug(f"Session contents: {request.session.items()}")
-	logger.debug(f"Active language: {get_language()}")
 	activate(request.session.get('django_language', 'en'))
 	context = {
 		'stats': {
@@ -86,7 +84,6 @@ def twoFactor_view(request):
 	activate(request.session.get('django_language', 'en'))
 	user = request.user
 	if user.is_authenticated:
-		logger.debug(f"{user.is_42_user}")
 		if not user.is_42_user and not user.two_factor_enable:
 			return render(request, 'views/twoFactor-view.html')
 		else:

@@ -15,11 +15,13 @@
 		<div id="form-errors" class="error-messages"></div>
 		<a href="#/register" class="auth-link">{% trans "Don't have an account? Register" %}</a>
 	</form>
-	<form id="2fa-form" class="auth-form" style="display: none;">
+	<form id="2fa-form" class="auth-form" hidden>
 		<div class="form-group">
-			<input type="text" id="2fa-code" name="2fa-code" placeholder={% trans "2FA Code" %} required>
+			<input type="text" id="2fa-code" name="2fa-code" placeholder={% trans "2FA Code" %} required autocomplete="off">
 		</div>
-		<button type="submit" class="login-button" autocomplete="off">{% trans "Verify 2FA" %} </button>
+		<div class="form-group">
+			<button type="submit" class="login-button" autocomplete="off">{% trans "Verify 2FA" %} </button>
+		</div>
 		<div id="form-errors" class="error-messages"></div>
 	</form>
 </div>

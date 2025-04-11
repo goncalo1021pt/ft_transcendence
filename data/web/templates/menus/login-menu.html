@@ -1,4 +1,4 @@
-
+{% load i18n %}
 {% if is_authenticated and friends.pending_received %}
 <span id="menu-notification-badge" class="badge bg-danger rounded-pill ms-1">{{ friends.pending_received|length }}</span>
 {% endif %}
@@ -18,15 +18,15 @@
     <div class="menu-buttons">
 		<div class="menu-user">{{ username }}</div>
         {% if is_authenticated %}
-            <div class="nav-button" onclick="window.location.hash='#/profile'">PROFILE
+            <div class="nav-button" onclick="window.location.hash='#/profile'">{% trans "PROFILE" %}
 				{% if friends.pending_received %}
 				<span class="badge bg-danger rounded-pill ms-1">{{ friends.pending_received|length }}</span>
 				{% endif %}
 			</div>
 
-            <div class="nav-button" id="logout-button">LOG OUT</div>
+            <div class="nav-button" id="logout-button">{% trans "LOG OUT" %}</div>
         {% else %}
-            <div class="nav-button" onclick="window.location.hash='#/login'">LOG IN</div>
+            <div class="nav-button" onclick="window.location.hash='#/login'">{% trans "LOG IN" %}</div>
         {% endif %}
     </div>
 </div>

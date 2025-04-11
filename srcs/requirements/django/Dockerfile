@@ -35,4 +35,6 @@ RUN chmod +x entry.sh
 
 # RUN python /ft_transcendence/manage.py startapp backend /ft_transcendence
 
-CMD ["./entry.sh"]
+WORKDIR /ft_transcendence
+
+CMD ["/entry.sh"]

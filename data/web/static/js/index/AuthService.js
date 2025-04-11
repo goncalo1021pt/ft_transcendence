@@ -29,8 +29,8 @@ export class AuthService {
 			console.log(response);
 			if (response.status === 201) {
 				console.log('2fa required');
-				document.getElementById('login-form').style.display = 'none';
-				document.getElementById('2fa-form').style.display = 'block';
+				document.getElementById('login-form').hidden = true;
+				document.getElementById('2fa-form').hidden = false;
 	
 				// Store the username for the 2FA request
 				const storedUsername = username;

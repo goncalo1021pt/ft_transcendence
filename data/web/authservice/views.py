@@ -287,9 +287,7 @@ def verify_2fa_enable(request):
 		if not device:
 			return JsonResponse({'error': 'Device not found'}, status=404)
 		
-		logger.debug(f"Verifying OTP token: {opt_token}")
 		if device.verify_token(opt_token):
-			logger.debug(f"OTP token verified successfully for user: {user.username}")
 			user.two_factor_enable = True
 			user.save()
 			return JsonResponse({'success': True, 'message': '2FA enabled successfully'})
@@ -321,17 +319,13 @@ def disable_2fa(request):
 @require_http_methods(["POST"])
 def verify_2fa_login(request):
 	data = json.loads(request.body)
-	logger.debug(f"Received data for 2FA login: {data}")
 	opt_token = data.get('code')
 	username = data.get('username')
 	user = User.objects.filter(username=username).first()
 	if not user:
-		logger.debug(f"User not found for 2FA login: {username}")
 		return JsonResponse({'error': 'User not found'}, status=404)
-	logger.debug(f"User for 2FA login: {user.username}")
 	
 	if not opt_token:
-		logger.debug("OTP token is missing for 2FA login")
 		return JsonResponse({'error': 'OTP token is required'}, status=400)
 	device = TOTPDevice.objects.filter(user=user, name='default').first()
 	if not device:
